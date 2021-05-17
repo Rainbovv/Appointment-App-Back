@@ -1,14 +1,15 @@
 package com.stefanini.appointmentapp.entities;
 
 
-import javax.persistence.CascadeType;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,13 +22,13 @@ import javax.persistence.Table;
 @Table(name = "role")
 public class Role {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@OneToMany()
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
-	private User user_id;
+	private Set<User> users = new HashSet<>();
 	
 	@Column(name = "name")
 	private String name;
@@ -46,9 +47,9 @@ public class Role {
 	 * @param name String
 	 */
 	
-	public Role(User user_id, String name) {
+	public Role(Set<User> users, String name) {
 		super();
-		this.user_id = user_id;
+		this.users = users;
 		this.name = name;
 	}
 	
@@ -71,21 +72,21 @@ public class Role {
 	}
 	
 	/**
-	 * Gets user id.
-	 * @return Long
+	 * Gets users.
+	 * @return Set<User>
 	 */
 
-	public User getUser_id() {
-		return user_id;
+	public Set<User> getUsers() {
+		return users;
 	}
 	
 	/**
-	 * Sets user id.
-	 * @param user_id Long
+	 * Sets users.
+	 * @param users Set<User>
 	 */
 
-	public void setUser_id(User user_id) {
-		this.user_id = user_id;
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 	
 	/**

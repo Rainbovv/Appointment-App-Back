@@ -1,6 +1,7 @@
 package com.stefanini.appointmentapp.entities;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,15 +21,15 @@ import javax.persistence.Table;
 public class DailySchedule {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	
 	@Column(name = "start")
-	private Time start;
+	private LocalDateTime start;
 	
 	@Column(name = "end")
-	private Time end;
+	private LocalDateTime end;
 
 	/**
 	 * Default DailySchedule constructor.
@@ -38,13 +39,14 @@ public class DailySchedule {
 	public DailySchedule() {
 		super();
 	}
-	
+
 	/**
 	 * Constructs and initializes a DailySchedule object with start and end time.
-	 * @param name String
+	 * @param start LocalDateTime
+	 * @param end LocalDateTime
 	 */
 
-	public DailySchedule(Time start, Time end) {
+	public DailySchedule(LocalDateTime start, LocalDateTime end) {
 		super();
 		this.start = start;
 		this.end = end;
@@ -73,7 +75,7 @@ public class DailySchedule {
 	 * @return Time
 	 */
 	
-	public Time getStart() {
+	public LocalDateTime getStart() {
 		return start;
 	}
 	
@@ -82,7 +84,7 @@ public class DailySchedule {
 	 * @param start Time
 	 */
 
-	public void setStart(Time start) {
+	public void setStart(LocalDateTime start) {
 		this.start = start;
 	}
 	
@@ -91,7 +93,7 @@ public class DailySchedule {
 	 * @return Time
 	 */
 
-	public Time getEnd() {
+	public LocalDateTime getEnd() {
 		return end;
 	}
 	
@@ -100,7 +102,7 @@ public class DailySchedule {
 	 * @param end Time
 	 */
 
-	public void setEnd(Time end) {
+	public void setEnd(LocalDateTime end) {
 		this.end = end;
 	}
 	
