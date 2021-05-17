@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "weekly_schedule")
 public class WeeklySchedule {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	
@@ -185,7 +185,7 @@ public class WeeklySchedule {
 	
 	/**
 	 * Sets schedule for Friday.
-	 * @param friday
+	 * @param friday DailySchedule
 	 */
 
 	public void setFriday(DailySchedule friday) {
@@ -221,7 +221,7 @@ public class WeeklySchedule {
 	
 	/**
 	 * Sets schedule for Sunday.
-	 * @param sunday
+	 * @param sunday DailSchedule
 	 */
 
 	public void setSunday(DailySchedule sunday) {

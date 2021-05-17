@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "speciality")
 public class Speciality {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	
@@ -42,8 +42,8 @@ public class Speciality {
 	
 	/**
 	 * Constructs and initializes a Speciality object with name and department.
-	 * @param name
-	 * @param department
+	 * @param name String
+	 * @param department Department
 	 */
 
 	public Speciality(String name, Department department) {

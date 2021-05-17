@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Table(name = "holiday")
 public class Holiday {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	
@@ -39,10 +39,12 @@ public class Holiday {
 	
 	public Holiday() {
 	}
-	
+
 	/**
 	 * Constructs and initializes a Holiday object with start, end, and description.
-	 * @param name String
+	 * @param start LocalDateTime
+	 * @param end LocalDateTime
+	 * @param description String
 	 */
 
 	public Holiday(Date start, Date end, String description) {
