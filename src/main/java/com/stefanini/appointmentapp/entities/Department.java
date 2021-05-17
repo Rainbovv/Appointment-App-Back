@@ -1,4 +1,4 @@
-package com.stefanini.entities;
+package com.stefanini.appointmentapp.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

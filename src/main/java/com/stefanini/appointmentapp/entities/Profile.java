@@ -1,4 +1,4 @@
-package com.stefanini.entities;
+package com.stefanini.appointmentapp.entities;
 
 import java.sql.Date;
 import java.util.Set;

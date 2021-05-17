@@ -1,4 +1,4 @@
-package com.stefanini.entities;
+package com.stefanini.appointmentapp.entities;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
@@ -22,7 +22,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-	private BigInteger id;
+	private Long id;
 	
 	@Column(name = "login")
 	private String login;
@@ -68,19 +68,19 @@ public class User {
 	
 	/**
 	 * Gets id.
-	 * @return BigInteger
+	 * @return Long
 	 */
 
-	public BigInteger getId() {
+	public Long getId() {
 		return id;
 	}
 	
 	/**
 	 * Sets id.
-	 * @param id BigInteger
+	 * @param id Long
 	 */
 
-	public void setId(BigInteger id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
