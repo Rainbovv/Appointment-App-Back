@@ -1,6 +1,0 @@
-mvnw
-mvnw.cmd
-HELP.md
-/target
-/bin
-/.mvn
