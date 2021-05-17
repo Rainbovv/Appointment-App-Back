@@ -1,4 +1,4 @@
-package stefanini.com.appointmentapp;
+package com.stefanini.appointmentapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
