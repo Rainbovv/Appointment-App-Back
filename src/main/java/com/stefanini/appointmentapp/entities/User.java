@@ -1,14 +1,8 @@
 package com.stefanini.appointmentapp.entities;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * User is an entity that represents a base user class.
@@ -20,7 +14,7 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	
@@ -34,10 +28,14 @@ public class User {
 	private LocalDateTime created;
 	
 	@Column(name = "last_update")
-	private LocalDateTime last_update;
+	private LocalDateTime lastUpdate;
 	
 	@Column(name = "status")
 	private int status;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "role_id", referencedColumnName = "id")
+	private Role role;
 
 	/**
 	 * Default User constructor.
@@ -53,16 +51,16 @@ public class User {
 	 * @param login String
 	 * @param password String
 	 * @param created LocalDateTime
-	 * @param last_update LocalDateTime
+	 * @param lastUpdate LocalDateTime
 	 * @param status int
 	 */
 
-	public User(String login, String password, LocalDateTime created, LocalDateTime last_update, int status) {
+	public User(String login, String password, LocalDateTime created, LocalDateTime lastUpdate, int status) {
 		super();
 		this.login = login;
 		this.password = password;
 		this.created = created;
-		this.last_update = last_update;
+		this.lastUpdate = lastUpdate;
 		this.status = status;
 	}
 	
@@ -144,16 +142,16 @@ public class User {
 	 */
 
 	public LocalDateTime getLast_update() {
-		return last_update;
+		return lastUpdate;
 	}
 	
 	/**
 	 * Sets data and time of last update.
-	 * @param last_update LocalDateTime
+	 * @param lastUpdate LocalDateTime
 	 */
 
-	public void setLast_update(LocalDateTime last_update) {
-		this.last_update = last_update;
+	public void setLast_update(LocalDateTime lastUpdate) {
+		this.lastUpdate = lastUpdate;
 	}
 	
 	/**

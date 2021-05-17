@@ -1,6 +1,7 @@
 package com.stefanini.appointmentapp.entities;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -26,7 +28,7 @@ import javax.persistence.Table;
 @Table(name = "profile")
 public class Profile {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	
@@ -35,17 +37,16 @@ public class Profile {
 			name = "doctors_speciality", 
 			joinColumns = { @JoinColumn(name = "doctor_id") }, 
 			inverseJoinColumns = { @JoinColumn(name = "speciality_id")})
-	private Set<Speciality> specialies;
+	private Set<Speciality> specialities;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
-	private User user_id;
+	@OneToOne(cascade = CascadeType.ALL)
+	private User user;
 	
 	@Column(name = "first_name")
-	private String first_name;
+	private String firstName;
 	
 	@Column(name = "last_name")
-	private String last_name;
+	private String lastName;
 	
 	@Column(name = "about")
 	private String about;
@@ -53,7 +54,7 @@ public class Profile {
 	@Column(name = "degree")
 	private String degree;
 	
-	@Column(name = "telepone")
+	@Column(name = "telephone")
 	private String telephone;
 	
 	@Column(name = "office")
@@ -67,20 +68,20 @@ public class Profile {
 	private WeeklySchedule schedule;
 	
 	@Column(name = "date_of_birth")
-	private Date date_of_birth;
+	private Date dateOfBirth;
 	
 	@Column(name = "address")
 	private String address;
 	
 	@Column(name = "social_number")
-	private String social_number;
+	private String socialNumber;
 	
 	@Column(name = "gender")
 	private String gender;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "holiday", referencedColumnName = "id")
-	private Set<Holiday> holidays;
+	private Set<Holiday> holidays = new HashSet<>();
 
 	/**
 	 * Default Profile constructor.
@@ -91,23 +92,23 @@ public class Profile {
 		super();
 	}
 
-	public Profile(Long id, User user_id, String first_name, String last_name, String about, String degree,
-			String telephone, int office, String email, WeeklySchedule schedule, Date date_of_birth, String address,
-			String social_number, String gender, Set<Holiday> holidays) {
+	public Profile(Long id, User user, String first_name, String last_name, String about, String degree,
+			String telephone, int office, String email, WeeklySchedule schedule, Date dateOfBirth, String address,
+			String socialNumber, String gender, Set<Holiday> holidays) {
 		super();
 		this.id = id;
-		this.user_id = user_id;
-		this.first_name = first_name;
-		this.last_name = last_name;
+		this.user = user;
+		this.firstName = first_name;
+		this.lastName = last_name;
 		this.about = about;
 		this.degree = degree;
 		this.telephone = telephone;
 		this.office = office;
 		this.email = email;
 		this.schedule = schedule;
-		this.date_of_birth = date_of_birth;
+		this.dateOfBirth = dateOfBirth;
 		this.address = address;
-		this.social_number = social_number;
+		this.socialNumber = socialNumber;
 		this.gender = gender;
 		this.holidays = holidays;
 	}
@@ -136,7 +137,7 @@ public class Profile {
 	 */
 
 	public User getUser_id() {
-		return user_id;
+		return user;
 	}
 	
 	/**
@@ -144,8 +145,8 @@ public class Profile {
 	 * @param user_id BigInteger
 	 */
 
-	public void setUser_id(User user_id) {
-		this.user_id = user_id;
+	public void setUser(User user_id) {
+		this.user = user_id;
 	}
 	
 	/**
@@ -153,17 +154,17 @@ public class Profile {
 	 * @return String
 	 */
 
-	public String getFirst_name() {
-		return first_name;
+	public String getFirstName() {
+		return firstName;
 	}
 	
 	/**
 	 * Sets first name.
-	 * @param first_name String
+	 * @param firstName String
 	 */
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	
 	/**
@@ -171,17 +172,17 @@ public class Profile {
 	 * @return String
 	 */
 
-	public String getLast_name() {
-		return last_name;
+	public String getLastName() {
+		return lastName;
 	}
 	
 	/**
 	 * Sets last name.
-	 * @param last_name String
+	 * @param lastName String
 	 */
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	
 	/**
@@ -297,17 +298,17 @@ public class Profile {
 	 * @return Date
 	 */
 
-	public Date getDate_of_birth() {
-		return date_of_birth;
+	public Date getDateOfBirth() {
+		return dateOfBirth;
 	}
 	
 	/**
 	 * Sets date of birth.
-	 * @param date_of_birth Date
+	 * @param dateOfBirth Date
 	 */
 
-	public void setDate_of_birth(Date date_of_birth) {
-		this.date_of_birth = date_of_birth;
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 	
 	/**
@@ -333,17 +334,17 @@ public class Profile {
 	 * @return String
 	 */
 
-	public String getSocial_number() {
-		return social_number;
+	public String getSocialNumber() {
+		return socialNumber;
 	}
 	
 	/**
 	 * Sets social number.
-	 * @param social_number String
+	 * @param socialNumber String
 	 */
 
-	public void setSocial_number(String social_number) {
-		this.social_number = social_number;
+	public void setSocialNumber(String socialNumber) {
+		this.socialNumber = socialNumber;
 	}
 	
 	/**
@@ -375,7 +376,7 @@ public class Profile {
 	
 	/**
 	 * Set holiday.
-	 * @param holiday Set<Holiday>
+	 * @param holidays Set<Holiday>
 	 */
 
 	public void setHoliday(Set<Holiday> holidays) {

@@ -1,9 +1,5 @@
 package com.stefanini.appointmentapp.entities;
 
-import java.math.BigInteger;
-import java.sql.Time;
-import java.time.LocalDateTime;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
+
 
 /**
  * Appointment is an entity that represents appointments made by users.
@@ -24,32 +22,32 @@ import javax.persistence.Table;
 @Table(name = "appointments")
 public class Appointment {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private BigInteger id;
+	private Long id;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "patient_id", referencedColumnName = "id")
-	private User patient_id;
+	private User patient;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "doctor_id", referencedColumnName = "id")
-	private User doctor_id;
+	private User doctor;
 	
 	@Column(name = "end_time")
-	private Time end_time;
+	private LocalDateTime endTime;
 	
 	@Column(name = "start_time")
-	private Time start_time;
+	private LocalDateTime startTime;
 	
 	@Column(name = "remark")
 	private String remark;
 	
 	@Column(name = "created")
 	private LocalDateTime created;
-	
+
 	@Column(name = "last_update")
-	private LocalDateTime last_update;
+	private LocalDateTime lastUpdate;
 
 	/**
 	 * Default Role constructor.
@@ -63,25 +61,25 @@ public class Appointment {
 	/**
 	 * Constructs and initializes an Appointment object with patient id, doctor id, start time, end time, remark, data and time of creation,
 	 * and data and time of last update.
-	 * @param patient_id BigInteger
-	 * @param doctor_id BigInteger
-	 * @param end_time Time
-	 * @param start_time Time
+	 * @param patient BigInteger
+	 * @param doctor BigInteger
+	 * @param endTime Time
+	 * @param startTime Time
 	 * @param remark String
 	 * @param created LocalDataTime
-	 * @param last_update LocalDataTime
+	 * @param lastUpdate LocalDataTime
 	 */
 
-	public Appointment(User patient_id, User doctor_id, Time end_time, Time start_time, String remark,
-			LocalDateTime created, LocalDateTime last_update) {
+	public Appointment(User patient, User doctor, LocalDateTime endTime, LocalDateTime startTime, String remark,
+			LocalDateTime created, LocalDateTime lastUpdate) {
 		super();
-		this.patient_id = patient_id;
-		this.doctor_id = doctor_id;
-		this.end_time = end_time;
-		this.start_time = start_time;
+		this.patient = patient;
+		this.doctor = doctor;
+		this.endTime = endTime;
+		this.startTime = startTime;
 		this.remark = remark;
 		this.created = created;
-		this.last_update = last_update;
+		this.lastUpdate = lastUpdate;
 	}
 	
 	/**
@@ -89,7 +87,7 @@ public class Appointment {
 	 * @return BigInteger
 	 */
 
-	public BigInteger getId() {
+	public Long getId() {
 		return id;
 	}
 	
@@ -98,7 +96,7 @@ public class Appointment {
 	 * @param id BigInteger
 	 */
 
-	public void setId(BigInteger id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
@@ -107,17 +105,17 @@ public class Appointment {
 	 * @return User
 	 */
 
-	public User getPatient_id() {
-		return patient_id;
+	public User getPatient() {
+		return patient;
 	}
 	
 	/**
 	 * Sets patient.
-	 * @param patient_id User
+	 * @param patient User
 	 */
 
-	public void setPatient_id(User patient_id) {
-		this.patient_id = patient_id;
+	public void setPatient_id(User patient) {
+		this.patient = patient;
 	}
 	
 	/**
@@ -125,17 +123,17 @@ public class Appointment {
 	 * @return User
 	 */
 
-	public User getDoctor_id() {
-		return doctor_id;
+	public User getDoctor() {
+		return doctor;
 	}
 	
 	/**
 	 * Sets doctor.
-	 * @param doctor_id User
+	 * @param doctor User
 	 */
 
-	public void setDoctor_id(User doctor_id) {
-		this.doctor_id = doctor_id;
+	public void setDoctor(User doctor) {
+		this.doctor = doctor;
 	}
 	
 	/**
@@ -143,17 +141,17 @@ public class Appointment {
 	 * @return Time
 	 */
 
-	public Time getEnd_time() {
-		return end_time;
+	public LocalDateTime getEndTime() {
+		return endTime;
 	}
 	
 	/**
 	 * Sets end time.
-	 * @param end_time Time
+	 * @param endTime Time
 	 */
 
-	public void setEnd_time(Time end_time) {
-		this.end_time = end_time;
+	public void setEndTime(LocalDateTime endTime) {
+		this.endTime = endTime;
 	}
 	
 	/**
@@ -161,17 +159,17 @@ public class Appointment {
 	 * @return Time
 	 */
 
-	public Time getStart_time() {
-		return start_time;
+	public LocalDateTime getStartTime() {
+		return startTime;
 	}
 	
 	/**
 	 * Sets start time.
-	 * @param start_time Time
+	 * @param startTime Time
 	 */
 
-	public void setStart_time(Time start_time) {
-		this.start_time = start_time;
+	public void setStarTime(LocalDateTime startTime) {
+		this.startTime = startTime;
 	}
 	
 	/**
@@ -215,17 +213,17 @@ public class Appointment {
 	 * @return LocalDateTime
 	 */
 
-	public LocalDateTime getLast_update() {
-		return last_update;
+	public LocalDateTime getLastUpdate() {
+		return lastUpdate;
 	}
 	
 	/**
 	 * Sets data and time of last update.
-	 * @param last_update LocalDateTime
+	 * @param lastUpdate LocalDateTime
 	 */
 
-	public void setLast_update(LocalDateTime last_update) {
-		this.last_update = last_update;
+	public void setLast_update(LocalDateTime lastUpdate) {
+		this.lastUpdate = lastUpdate;
 	}
 	
 	
