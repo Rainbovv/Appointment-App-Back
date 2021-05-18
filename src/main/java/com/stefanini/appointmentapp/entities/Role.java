@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,8 +24,7 @@ public class Role {
 	@Column(name = "id")
 	private Long id;
 	
-	@OneToMany()
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	@OneToMany(mappedBy = "id")
 	private Set<User> users = new HashSet<>();
 	
 	@Column(name = "name")
