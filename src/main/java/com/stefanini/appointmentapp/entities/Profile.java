@@ -3,7 +3,6 @@ package com.stefanini.appointmentapp.entities;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;

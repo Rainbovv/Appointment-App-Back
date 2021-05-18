@@ -1,7 +1,6 @@
 package com.stefanini.appointmentapp.entities;
 
 import java.time.LocalDateTime;
-
 import javax.persistence.*;
 
 /**
