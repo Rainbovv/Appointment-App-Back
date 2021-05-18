@@ -29,8 +29,6 @@ public class UserController {
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     User create(@RequestBody User user) {
 
-        System.err.println(user);
-
         return userService.create(user);
     }
 
