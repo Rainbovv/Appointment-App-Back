@@ -4,11 +4,9 @@ import com.stefanini.appointmentapp.dao.GenericDAO;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Transactional
 public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 
     @PersistenceContext

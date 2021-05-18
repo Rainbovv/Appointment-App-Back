@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "speciality")
 public class Speciality {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 	
@@ -30,27 +30,6 @@ public class Speciality {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "department", referencedColumnName = "id")
 	private Department department;
-
-	/**
-	 * Default Speciality constructor.
-	 * Constructs and initializes a Speciality object.
-	 */
-	
-	public Speciality() {
-		super();
-	}
-	
-	/**
-	 * Constructs and initializes a Speciality object with name and department.
-	 * @param name String
-	 * @param department Department
-	 */
-
-	public Speciality(String name, Department department) {
-		super();
-		this.name = name;
-		this.department = department;
-	}
 
 	/**
 	 * Gets id.
@@ -105,6 +84,13 @@ public class Speciality {
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Speciality{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", department=" + department +
+				'}';
+	}
 }

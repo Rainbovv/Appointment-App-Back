@@ -18,9 +18,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "role")
-public class Role {
+public class UserRole {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 	
@@ -29,26 +29,6 @@ public class Role {
 	
 	@Column(name = "name")
 	private String name;
-
-	/**
-	 * Default Role constructor.
-	 * Constructs and initializes a Role object.
-	 */
-	
-	public Role() {
-		super();
-	}
-
-	/**
-	 * Constructs and initializes a Role object with name.
-	 * @param name String
-	 */
-	
-	public Role(Set<User> users, String name) {
-		super();
-		this.users = users;
-		this.name = name;
-	}
 	
 	/**
 	 * Gets id.
@@ -102,5 +82,14 @@ public class Role {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Role{" +
+				"id=" + id +
+				", users=" + users +
+				", name='" + name + '\'' +
+				'}';
 	}
 }
