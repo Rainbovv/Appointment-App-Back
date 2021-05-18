@@ -4,6 +4,7 @@ import com.stefanini.appointmentapp.dao.GenericDAO;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
