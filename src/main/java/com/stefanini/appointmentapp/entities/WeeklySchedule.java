@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "weekly_schedule")
 public class WeeklySchedule {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 	
@@ -51,38 +51,6 @@ public class WeeklySchedule {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "sunday", referencedColumnName = "id")
 	private DailySchedule sunday;
-
-	/**
-	 * Default Department constructor.
-	 * Constructs and initializes a Department object.
-	 */
-	
-	public WeeklySchedule() {
-		super();
-	}
-
-	/**
-	 * Constructs and initializes a WeeklySchedule object with DailySchedule for each day
-	 * @param monday DailySchedule
-	 * @param tuesday DailySchedule
-	 * @param wednesday DailySchedule
-	 * @param thursday DailySchedule
-	 * @param friday DailySchedule
-	 * @param saturday DailySchedule
-	 * @param sunday DailySchedule
-	 */
-	
-	public WeeklySchedule(DailySchedule monday, DailySchedule tuesday, DailySchedule wednesday, DailySchedule thursday,
-			DailySchedule friday, DailySchedule saturday, DailySchedule sunday) {
-		super();
-		this.monday = monday;
-		this.tuesday = tuesday;
-		this.wednesday = wednesday;
-		this.thursday = thursday;
-		this.friday = friday;
-		this.saturday = saturday;
-		this.sunday = sunday;
-	}
 	
 	/**
 	 * Gets id.
@@ -226,5 +194,19 @@ public class WeeklySchedule {
 
 	public void setSunday(DailySchedule sunday) {
 		this.sunday = sunday;
+	}
+
+	@Override
+	public String toString() {
+		return "WeeklySchedule{" +
+				"id=" + id +
+				", monday=" + monday +
+				", tuesday=" + tuesday +
+				", wednesday=" + wednesday +
+				", thursday=" + thursday +
+				", friday=" + friday +
+				", saturday=" + saturday +
+				", sunday=" + sunday +
+				'}';
 	}
 }

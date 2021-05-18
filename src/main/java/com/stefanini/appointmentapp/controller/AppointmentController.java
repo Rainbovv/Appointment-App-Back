@@ -11,8 +11,11 @@ import java.util.Set;
 @RequestMapping("api/appointments")
 public class AppointmentController {
 
-    @Autowired
     AppointmentService appointmentService;
+
+    public AppointmentController(AppointmentService appointmentService) {
+        this.appointmentService = appointmentService;
+    }
 
     @GetMapping("")
     Set<Appointment> findAll() {

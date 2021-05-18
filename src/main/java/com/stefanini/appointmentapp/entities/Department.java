@@ -18,35 +18,13 @@ import javax.persistence.Table;
 public class Department {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 	
 	@Column(name = "name")
 	private String name;
-	
-	/**
-	 * Default Department constructor.
-	 * Constructs and initializes a Department object.
-	 */
-	
-	public Department() {
-		super();
-	}
-	
-	/**
-	 * Constructs and initializes a Department object with name.
-	 * @param name String
-	 */
-	
-	public Department(String name) {
-		this.name = name;
-	}
 
-	/**
-	 * Gets id.
-	 * @return Long
-	 */
 	
 	public Long getId() {
 		return id;
@@ -78,7 +56,12 @@ public class Department {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "Department{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				'}';
+	}
 }

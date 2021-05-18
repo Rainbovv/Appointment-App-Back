@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class DailySchedule {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 	
@@ -28,27 +28,6 @@ public class DailySchedule {
 	
 	@Column(name = "end")
 	private LocalDateTime end;
-
-	/**
-	 * Default DailySchedule constructor.
-	 * Constructs and initializes a DailySchedule object.
-	 */
-	
-	public DailySchedule() {
-		super();
-	}
-
-	/**
-	 * Constructs and initializes a DailySchedule object with start and end time.
-	 * @param start LocalDateTime
-	 * @param end LocalDateTime
-	 */
-
-	public DailySchedule(LocalDateTime start, LocalDateTime end) {
-		super();
-		this.start = start;
-		this.end = end;
-	}
 
 	/**
 	 * gets id.
@@ -103,6 +82,13 @@ public class DailySchedule {
 	public void setEnd(LocalDateTime end) {
 		this.end = end;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "DailySchedule{" +
+				"id=" + id +
+				", start=" + start +
+				", end=" + end +
+				'}';
+	}
 }
