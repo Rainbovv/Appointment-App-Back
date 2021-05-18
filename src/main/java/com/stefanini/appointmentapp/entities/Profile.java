@@ -3,19 +3,7 @@ package com.stefanini.appointmentapp.entities;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Profile is an entity that represents personal and public information about a users.
@@ -31,7 +19,7 @@ public class Profile {
 	@Column(name = "id")
 	private Long id;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "doctors_speciality", 
 			joinColumns = { @JoinColumn(name = "doctor_id") }, 
