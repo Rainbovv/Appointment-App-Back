@@ -17,7 +17,7 @@ public class User {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "login")
+	@Column(name = "login", unique = true)
 	private String login;
 	
 	@Column(name = "password")
@@ -33,7 +33,7 @@ public class User {
 	private int status;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "role_id", referencedColumnName = "id")
+	@JoinColumn(name = "role_id")
 	private Role role;
 
 	/**
@@ -58,8 +58,8 @@ public class User {
 		super();
 		this.login = login;
 		this.password = password;
-		this.created = created;
-		this.lastUpdate = lastUpdate;
+//		this.created = created;
+//		this.lastUpdate = lastUpdate;
 		this.status = status;
 	}
 	
