@@ -1,0 +1,46 @@
+package com.stefanini.appointmentapp.controller;
+
+import com.stefanini.appointmentapp.entities.Department;
+import com.stefanini.appointmentapp.service.DepartmentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
+
+
+@RestController
+@RequestMapping("/api")
+public class DepartmentController {
+    @Autowired
+    final DepartmentService departmentService;
+
+    public DepartmentController(DepartmentService departmentService) {
+        this.departmentService = departmentService;
+    }
+
+    @GetMapping("/departments")
+    public Set<Department> getList() {
+
+        return departmentService.getList();
+    }
+
+    @GetMapping("/departments/{departmentId}")
+    public Department getOne(@PathVariable long departmentId) {
+        return departmentService.getOne(departmentId);
+    }
+
+    @PostMapping("/departments")
+    public Department create(@RequestBody Department department) {
+        return departmentService.create(department);
+    }
+
+    @PutMapping("/departments/{departmentId}")
+    public Department update(@RequestBody Department department, @PathVariable long departmentId) {
+        return departmentService.update(department, departmentId);
+    }
+
+    @DeleteMapping("/departments/{departmentId}")
+    public void delete(@PathVariable long departmentId) {
+        departmentService.delete(departmentId);
+    }
+}
