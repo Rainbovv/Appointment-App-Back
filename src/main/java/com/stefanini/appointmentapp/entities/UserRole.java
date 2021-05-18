@@ -1,6 +1,5 @@
 package com.stefanini.appointmentapp.entities;
 
-
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -8,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,38 +18,17 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "role")
-public class Role {
+public class UserRole {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 	
-	@OneToMany()
-	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	@OneToMany(mappedBy = "id")
 	private Set<User> users = new HashSet<>();
 	
 	@Column(name = "name")
 	private String name;
-
-	/**
-	 * Default Role constructor.
-	 * Constructs and initializes a Role object.
-	 */
-	
-	public Role() {
-		super();
-	}
-
-	/**
-	 * Constructs and initializes a Role object with name.
-	 * @param name String
-	 */
-	
-	public Role(Set<User> users, String name) {
-		super();
-		this.users = users;
-		this.name = name;
-	}
 	
 	/**
 	 * Gets id.
@@ -105,5 +82,14 @@ public class Role {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Role{" +
+				"id=" + id +
+				", users=" + users +
+				", name='" + name + '\'' +
+				'}';
 	}
 }

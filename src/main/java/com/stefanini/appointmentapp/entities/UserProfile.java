@@ -1,22 +1,9 @@
 package com.stefanini.appointmentapp.entities;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Profile is an entity that represents personal and public information about a users.
@@ -26,13 +13,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "profile")
-public class Profile {
+public class UserProfile {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "doctors_speciality", 
 			joinColumns = { @JoinColumn(name = "doctor_id") }, 
@@ -64,11 +51,11 @@ public class Profile {
 	private String email;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "schedule", referencedColumnName = "weekly_schedule")
+	@JoinColumn(name = "schedule")
 	private WeeklySchedule schedule;
 	
 	@Column(name = "date_of_birth")
-	private Date dateOfBirth;
+	private LocalDateTime dateOfBirth;
 	
 	@Column(name = "address")
 	private String address;
@@ -83,35 +70,6 @@ public class Profile {
 	@JoinColumn(name = "holiday", referencedColumnName = "id")
 	private Set<Holiday> holidays = new HashSet<>();
 
-	/**
-	 * Default Profile constructor.
-	 * Constructs and initializes a profile object.
-	 */
-	
-	public Profile() {
-		super();
-	}
-
-	public Profile(Long id, User user, String first_name, String last_name, String about, String degree,
-			String telephone, int office, String email, WeeklySchedule schedule, Date dateOfBirth, String address,
-			String socialNumber, String gender, Set<Holiday> holidays) {
-		super();
-		this.id = id;
-		this.user = user;
-		this.firstName = first_name;
-		this.lastName = last_name;
-		this.about = about;
-		this.degree = degree;
-		this.telephone = telephone;
-		this.office = office;
-		this.email = email;
-		this.schedule = schedule;
-		this.dateOfBirth = dateOfBirth;
-		this.address = address;
-		this.socialNumber = socialNumber;
-		this.gender = gender;
-		this.holidays = holidays;
-	}
 	
 	/**
 	 * Gets id.
@@ -298,7 +256,7 @@ public class Profile {
 	 * @return Date
 	 */
 
-	public Date getDateOfBirth() {
+	public LocalDateTime getDateOfBirth() {
 		return dateOfBirth;
 	}
 	
@@ -307,7 +265,7 @@ public class Profile {
 	 * @param dateOfBirth Date
 	 */
 
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(LocalDateTime dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	
@@ -381,5 +339,27 @@ public class Profile {
 
 	public void setHoliday(Set<Holiday> holidays) {
 		this.holidays = holidays;
+	}
+
+	@Override
+	public String toString() {
+		return "Profile{" +
+				"id=" + id +
+				", specialities=" + specialities +
+				", user=" + user +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", about='" + about + '\'' +
+				", degree='" + degree + '\'' +
+				", telephone='" + telephone + '\'' +
+				", office=" + office +
+				", email='" + email + '\'' +
+				", schedule=" + schedule +
+				", dateOfBirth=" + dateOfBirth +
+				", address='" + address + '\'' +
+				", socialNumber='" + socialNumber + '\'' +
+				", gender='" + gender + '\'' +
+				", holidays=" + holidays +
+				'}';
 	}
 }

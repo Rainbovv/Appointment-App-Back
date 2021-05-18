@@ -1,7 +1,6 @@
 package com.stefanini.appointmentapp.entities;
 
-import java.sql.Date;
-
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,40 +18,18 @@ import javax.persistence.Table;
 @Table(name = "holiday")
 public class Holiday {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 	
 	@Column(name = "start")
-	private Date start;
+	private LocalDateTime start;
 	
 	@Column(name = "end")
-	private Date end;
+	private LocalDateTime end;
 	
 	@Column(name = "description")
 	private String description;
-
-	/**
-	 * Default Holiday constructor.
-	 * Constructs and initializes a Holiday object.
-	 */
-	
-	public Holiday() {
-	}
-
-	/**
-	 * Constructs and initializes a Holiday object with start, end, and description.
-	 * @param start LocalDateTime
-	 * @param end LocalDateTime
-	 * @param description String
-	 */
-
-	public Holiday(Date start, Date end, String description) {
-		super();
-		this.start = start;
-		this.end = end;
-		this.description = description;
-	}
 	
 	/**
 	 * Gets id.
@@ -74,37 +51,37 @@ public class Holiday {
 	
 	/**
 	 * Gets start date.
-	 * @return Date
+	 * @return LocalDateTime
 	 */
 
-	public Date getStart() {
+	public LocalDateTime getStart() {
 		return start;
 	}
 	
 	/**
 	 * sets start date.
-	 * @param start Date
+	 * @param start LocalDateTime
 	 */
 
-	public void setStart(Date start) {
+	public void setStart(LocalDateTime start) {
 		this.start = start;
 	}
 	
 	/**
 	 * Gets end date.
-	 * @return Date
+	 * @return LocalDateTime
 	 */
 
-	public Date getEnd() {
+	public LocalDateTime getEnd() {
 		return end;
 	}
 	
 	/**
 	 * Sets end date.
-	 * @param end Date
+	 * @param end LocalDateTime
 	 */
 
-	public void setEnd(Date end) {
+	public void setEnd(LocalDateTime end) {
 		this.end = end;
 	}
 	
@@ -125,7 +102,14 @@ public class Holiday {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "Holiday{" +
+				"id=" + id +
+				", start=" + start +
+				", end=" + end +
+				", description='" + description + '\'' +
+				'}';
+	}
 }

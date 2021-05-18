@@ -1,7 +1,6 @@
 package com.stefanini.appointmentapp.entities;
 
 import java.time.LocalDateTime;
-
 import javax.persistence.*;
 
 /**
@@ -18,7 +17,7 @@ public class User {
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "login")
+	@Column(name = "login", unique = true)
 	private String login;
 	
 	@Column(name = "password")
@@ -34,35 +33,9 @@ public class User {
 	private int status;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "role_id", referencedColumnName = "id")
-	private Role role;
+	@JoinColumn(name = "role_id")
+	private UserRole role;
 
-	/**
-	 * Default User constructor.
-	 * Constructs and initializes a User object.
-	 */
-	
-	public User() {
-		super();
-	}
-	
-	/**
-	 * Constructs and initializes a User object with login, password, created, last update, and status.
-	 * @param login String
-	 * @param password String
-	 * @param created LocalDateTime
-	 * @param lastUpdate LocalDateTime
-	 * @param status int
-	 */
-
-	public User(String login, String password, LocalDateTime created, LocalDateTime lastUpdate, int status) {
-		super();
-		this.login = login;
-		this.password = password;
-		this.created = created;
-		this.lastUpdate = lastUpdate;
-		this.status = status;
-	}
 	
 	/**
 	 * Gets id.
@@ -171,5 +144,17 @@ public class User {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", login='" + login + '\'' +
+				", password='" + password + '\'' +
+				", created=" + created +
+				", lastUpdate=" + lastUpdate +
+				", status=" + status +
+				", role=" + role +
+				'}';
+	}
 }
