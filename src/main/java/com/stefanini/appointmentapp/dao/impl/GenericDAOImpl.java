@@ -10,7 +10,7 @@ import java.util.Set;
 public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 
     @PersistenceContext
-    protected EntityManager entityManager = Persistence.createEntityManagerFactory("com.stefanini.appointmentapp").createEntityManager();
+    protected EntityManager entityManager;
 
     @Override
     public T create(T t) {

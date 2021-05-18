@@ -64,7 +64,7 @@ public class Profile {
 	private String email;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "schedule", referencedColumnName = "weekly_schedule")
+	@JoinColumn(name = "schedule")
 	private WeeklySchedule schedule;
 	
 	@Column(name = "date_of_birth")
