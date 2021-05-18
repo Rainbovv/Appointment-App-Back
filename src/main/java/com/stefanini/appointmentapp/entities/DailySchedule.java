@@ -1,8 +1,6 @@
 package com.stefanini.appointmentapp.entities;
 
-import java.sql.Time;
 import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
