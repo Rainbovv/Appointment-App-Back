@@ -58,8 +58,8 @@ public class User {
 		super();
 		this.login = login;
 		this.password = password;
-//		this.created = created;
-//		this.lastUpdate = lastUpdate;
+		this.created = created;
+		this.lastUpdate = lastUpdate;
 		this.status = status;
 	}
 	
