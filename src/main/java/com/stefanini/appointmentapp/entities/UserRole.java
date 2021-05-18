@@ -1,5 +1,6 @@
 package com.stefanini.appointmentapp.entities;
 
+import com.stefanini.appointmentapp.entities.enums.RoleName;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -28,7 +29,7 @@ public class UserRole {
 	private Set<User> users = new HashSet<>();
 	
 	@Column(name = "name")
-	private String name;
+	private RoleName name;
 	
 	/**
 	 * Gets id.
@@ -71,7 +72,7 @@ public class UserRole {
 	 * @return String
 	 */
 
-	public String getName() {
+	public RoleName getName() {
 		return name;
 	}
 	
@@ -80,7 +81,7 @@ public class UserRole {
 	 * @param name String
 	 */
 
-	public void setName(String name) {
+	public void setName(RoleName name) {
 		this.name = name;
 	}
 
