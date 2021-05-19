@@ -2,7 +2,6 @@ package com.stefanini.appointmentapp.controller;
 
 import com.stefanini.appointmentapp.entities.Appointment;
 import com.stefanini.appointmentapp.service.AppointmentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import java.util.Set;
