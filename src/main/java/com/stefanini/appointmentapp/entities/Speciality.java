@@ -1,14 +1,8 @@
 package com.stefanini.appointmentapp.entities;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * Speciality is an entity that represents a speciality from a department.
@@ -24,9 +18,12 @@ public class Speciality {
     @Column(name = "id")
     private Long id;
 
+    @NotBlank(message = "Error: Speciality name must not be blank!")
+    @NotNull
     @Column(name = "name")
     private String name;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;

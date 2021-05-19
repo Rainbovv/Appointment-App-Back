@@ -1,7 +1,11 @@
 package com.stefanini.appointmentapp.entities;
 
+
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
-import java.util.Set;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * Department is an entity that represents departments in clinic.
@@ -17,6 +21,8 @@ public class Department {
     @Column(name = "id")
     private Long id;
 
+    @NotNull
+    @NotBlank(message = "Error: Department name must not be blank!")
     @Column(name = "name")
     private String name;
 
