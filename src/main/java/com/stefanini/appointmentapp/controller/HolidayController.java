@@ -29,7 +29,7 @@ public class HolidayController {
         return holidayService.create(holiday);
     }
 
-    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     Holiday update(@RequestBody Holiday holiday) {
         return holidayService.update(holiday);
     }

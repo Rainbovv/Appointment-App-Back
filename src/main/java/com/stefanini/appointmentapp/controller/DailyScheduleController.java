@@ -26,7 +26,7 @@ public class DailyScheduleController {
         return dailyScheduleService.create(dailySchedule);
     }
 
-    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     DailySchedule update(@RequestBody DailySchedule dailySchedule) {
         return dailyScheduleService.update(dailySchedule);
     }

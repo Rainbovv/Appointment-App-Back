@@ -26,7 +26,7 @@ public class WeeklyScheduleController {
         return weeklyScheduleService.create(weeklySchedule);
     }
 
-    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     WeeklySchedule update(@RequestBody WeeklySchedule weeklySchedule) {
         return weeklyScheduleService.update(weeklySchedule);
     }
