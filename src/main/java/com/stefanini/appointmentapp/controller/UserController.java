@@ -2,7 +2,6 @@ package com.stefanini.appointmentapp.controller;
 
 import com.stefanini.appointmentapp.entities.User;
 import com.stefanini.appointmentapp.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import java.util.Set;
@@ -11,8 +10,11 @@ import java.util.Set;
 @RequestMapping("api/users")
 public class UserController {
 
-    @Autowired
-    UserService userService;
+    private UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("")
     Set<User> findAll() {
@@ -28,8 +30,6 @@ public class UserController {
 
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     User create(@RequestBody User user) {
-
-        System.err.println(user);
 
         return userService.create(user);
     }

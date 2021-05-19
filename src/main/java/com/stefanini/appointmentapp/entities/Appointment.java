@@ -1,6 +1,5 @@
 package com.stefanini.appointmentapp.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,15 +21,15 @@ import java.time.LocalDateTime;
 @Table(name = "appointments")
 public class Appointment {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "patient_id", referencedColumnName = "id")
 	private User patient;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "doctor_id", referencedColumnName = "id")
 	private User doctor;
 	
@@ -49,39 +48,6 @@ public class Appointment {
 	@Column(name = "last_update")
 	private LocalDateTime lastUpdate;
 
-	/**
-	 * Default Role constructor.
-	 * Constructs and initializes a Role object.
-	 */
-	
-	public Appointment() {
-		super();
-	}
-	
-	/**
-	 * Constructs and initializes an Appointment object with patient id, doctor id, start time, end time, remark, data and time of creation,
-	 * and data and time of last update.
-	 * @param patient BigInteger
-	 * @param doctor BigInteger
-	 * @param endTime Time
-	 * @param startTime Time
-	 * @param remark String
-	 * @param created LocalDataTime
-	 * @param lastUpdate LocalDataTime
-	 */
-
-	public Appointment(User patient, User doctor, LocalDateTime endTime, LocalDateTime startTime, String remark,
-			LocalDateTime created, LocalDateTime lastUpdate) {
-		super();
-		this.patient = patient;
-		this.doctor = doctor;
-		this.endTime = endTime;
-		this.startTime = startTime;
-		this.remark = remark;
-		this.created = created;
-		this.lastUpdate = lastUpdate;
-	}
-	
 	/**
 	 * Gets id.
 	 * @return BigInteger
@@ -225,6 +191,18 @@ public class Appointment {
 	public void setLast_update(LocalDateTime lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Appointment{" +
+				"id=" + id +
+				", patient=" + patient +
+				", doctor=" + doctor +
+				", endTime=" + endTime +
+				", startTime=" + startTime +
+				", remark='" + remark + '\'' +
+				", created=" + created +
+				", lastUpdate=" + lastUpdate +
+				'}';
+	}
 }
