@@ -1,5 +1,6 @@
 package com.stefanini.appointmentapp.dao.impl;
 
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import com.stefanini.appointmentapp.dao.UserRoleDAO;

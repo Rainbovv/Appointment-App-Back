@@ -5,6 +5,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.hibernate.SessionFactory;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,9 +16,9 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
     protected EntityManager entityManager;
     protected abstract Class<T> getEntityClass();
 
-    @Override
+	@Override
     public T create(T entity) {
-
+		
         entityManager.persist(entity);
         entityManager.flush();
 
