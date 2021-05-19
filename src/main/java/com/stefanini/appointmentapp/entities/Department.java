@@ -1,8 +1,5 @@
 package com.stefanini.appointmentapp.entities;
 
-
-import org.hibernate.validator.constraints.UniqueElements;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
