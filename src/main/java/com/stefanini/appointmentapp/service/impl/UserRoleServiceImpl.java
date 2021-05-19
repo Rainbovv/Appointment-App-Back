@@ -2,6 +2,8 @@ package com.stefanini.appointmentapp.service.impl;
 
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import com.stefanini.appointmentapp.dao.UserRoleDAO;
@@ -23,12 +25,14 @@ public class UserRoleServiceImpl implements UserRoleService {
 	public Set<UserRole> findAll() {
 		return userRoleDAO.findAll();
 	}
-
+	
+	@Transactional
 	@Override
 	public UserRole create(UserRole userRole) {
 		return userRoleDAO.create(userRole);
 	}
 
+	@Transactional
 	@Override
 	public UserRole update(UserRole userRole) {
 		return userRoleDAO.update(userRole);
@@ -39,6 +43,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 		return userRoleDAO.findById(id);
 	}
 
+	@Transactional
 	@Override
 	public void delete(UserRole userRole) {
 		userRoleDAO.delete(userRole);
