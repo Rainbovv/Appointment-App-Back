@@ -6,13 +6,44 @@ import java.util.Set;
 
 
 public interface SpecialityService {
-    Set<Speciality> getList();
+    /**
+     * Method finds all existing specialities
+     *
+     * @return specialities set
+     * @author Igor Filipenco
+     */
+    Set<Speciality> findAll();
 
-    Speciality getOne(long id);
+    /**
+     * Method finds speciality by id
+     *
+     * @return speciality
+     * @author Igor Filipenco
+     */
+    Speciality findById(Long id);
 
+    /**
+     * Method creates department.
+     * NOTE: do not forget to pass department with departmentId to link creating speciality
+     * with existing department
+     *
+     * @return speciality
+     * @author Igor Filipenco
+     */
     Speciality create(Speciality speciality);
 
+    /**
+     * Method updates existing speciality
+     *
+     * @return speciality
+     * @author Igor Filipenco
+     */
     Speciality update(Speciality speciality);
 
-    void delete(long specialityId);
+    /**
+     * Method deletes existing speciality
+     *
+     * @author Igor Filipenco
+     */
+    void delete(Long specialityId);
 }

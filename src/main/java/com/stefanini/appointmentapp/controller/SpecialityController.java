@@ -2,6 +2,7 @@ package com.stefanini.appointmentapp.controller;
 
 import com.stefanini.appointmentapp.entities.Speciality;
 import com.stefanini.appointmentapp.service.SpecialityService;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -18,27 +19,26 @@ public class SpecialityController {
 
     @GetMapping("/specialities")
     public Set<Speciality> getList() {
-
-        return specialityService.getList();
+        return specialityService.findAll();
     }
 
     @GetMapping("/specialities/{specialityId}")
     public Speciality getOne(@PathVariable long specialityId) {
-        return specialityService.getOne(specialityId);
+        return specialityService.findById(specialityId);
     }
 
-    @PostMapping("/specialities")
+    @PostMapping(value = "/specialities", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Speciality create(@RequestBody Speciality speciality) {
         return specialityService.create(speciality);
     }
 
-    @PutMapping("/specialities")
+    @PutMapping(value = "/specialities", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Speciality update(@RequestBody Speciality speciality) {
         return specialityService.update(speciality);
     }
 
-    @DeleteMapping("/specialities/{specialityId}")
-    public void delete(@PathVariable long specialityId) {
+    @DeleteMapping(value = "/specialities/{specialityId}")
+    public void delete(@PathVariable Long specialityId) {
         specialityService.delete(specialityId);
     }
 }
