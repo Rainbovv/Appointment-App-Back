@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  * DailySchedule is an entity that represents daily schedule for a clinic worker.
@@ -22,10 +23,12 @@ public class DailySchedule {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
-	
+
+	@NotNull
 	@Column(name = "start")
 	private LocalDateTime start;
-	
+
+	@NotNull
 	@Column(name = "end")
 	private LocalDateTime end;
 

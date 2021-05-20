@@ -23,32 +23,32 @@ public class WeeklySchedule {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "monday", referencedColumnName = "id")
 	private DailySchedule monday;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "tuesday", referencedColumnName = "id")
 	private DailySchedule tuesday;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "wednesday", referencedColumnName = "id")
 	private DailySchedule wednesday;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "thursday", referencedColumnName = "id")
 	private DailySchedule thursday;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "friday", referencedColumnName = "id")
 	private DailySchedule friday;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "saturday", referencedColumnName = "id")
 	private DailySchedule saturday;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "sunday", referencedColumnName = "id")
 	private DailySchedule sunday;
 	

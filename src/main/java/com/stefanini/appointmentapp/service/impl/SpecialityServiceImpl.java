@@ -1,7 +1,6 @@
 package com.stefanini.appointmentapp.service.impl;
 
 import com.stefanini.appointmentapp.dao.SpecialityDAO;
-import com.stefanini.appointmentapp.entities.Department;
 import com.stefanini.appointmentapp.entities.Speciality;
 import com.stefanini.appointmentapp.service.DepartmentService;
 import com.stefanini.appointmentapp.service.SpecialityService;
@@ -35,14 +34,6 @@ public class SpecialityServiceImpl implements SpecialityService {
     @Transactional
     @Override
     public Speciality create(Speciality speciality) {
-        Long departmentId = speciality.getDepartment().getId();
-        Department department = departmentService.findById(departmentId);
-
-        if (department == null) {
-            throw new IllegalArgumentException("Department search error: no department with id = " + departmentId);
-        }
-
-        speciality.setDepartment(department);
 
         return specialityDAO.create(speciality);
     }
@@ -50,14 +41,6 @@ public class SpecialityServiceImpl implements SpecialityService {
     @Transactional
     @Override
     public Speciality update(Speciality speciality) {
-        Long departmentId = speciality.getDepartment().getId();
-        Department department = departmentService.findById(departmentId);
-
-        if (department == null) {
-            throw new IllegalArgumentException("Department search error: no department with id = " + departmentId);
-        }
-
-        speciality.setDepartment(department);
 
         return specialityDAO.update(speciality);
     }
