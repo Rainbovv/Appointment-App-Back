@@ -2,10 +2,11 @@ package com.stefanini.appointmentapp.entities;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.lang.NonNull;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -43,21 +44,40 @@ public class User {
 	@Column(name = "status")
 	private int status;
 
-	@NotNull
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "role_id")
-	private UserRole role;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "user_roles",
+	        joinColumns = @JoinColumn(name = "user_id"),
+	        inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private List<UserRole> roles = new ArrayList<>();
 
 	
+	public List<UserRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<UserRole> roles) {
+		this.roles = roles;
+	}
+
 	/**
 	 * Gets id.
 	 * @return Long
 	 */
+	
+	
 
 	public Long getId() {
 		return id;
 	}
 	
+	public LocalDateTime getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(LocalDateTime lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
 	/**
 	 * Sets id.
 	 * @param id Long
@@ -166,7 +186,6 @@ public class User {
 				", created=" + created +
 				", lastUpdate=" + lastUpdate +
 				", status=" + status +
-				", role=" + role +
 				'}';
 	}
 }

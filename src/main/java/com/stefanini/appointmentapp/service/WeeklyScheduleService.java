@@ -1,6 +1,5 @@
 package com.stefanini.appointmentapp.service;
 
-import com.stefanini.appointmentapp.entities.Holiday;
 import com.stefanini.appointmentapp.entities.WeeklySchedule;
 
 import java.util.Set;
