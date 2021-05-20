@@ -1,5 +1,6 @@
 package com.stefanini.appointmentapp.service.impl;
 
+import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dao.DepartmentDAO;
 import com.stefanini.appointmentapp.entities.Department;
 import com.stefanini.appointmentapp.service.DepartmentService;
@@ -19,22 +20,26 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    @Loggable
     public Set<Department> findAll() {
         return departmentDAO.findAll();
     }
 
     @Override
+    @Loggable
     public Department findById(Long id) {
         return departmentDAO.findById(id);
     }
 
     @Transactional
+    @Loggable
     @Override
     public Department create(Department department) {
         return departmentDAO.create(department);
     }
 
     @Transactional
+    @Loggable
     @Override
     public void delete(long departmentId) {
         Department departmentToDelete = departmentDAO.findById(departmentId);
@@ -47,6 +52,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Transactional
+    @Loggable
     @Override
     public Department update(Department department) {
         return departmentDAO.update(department);
