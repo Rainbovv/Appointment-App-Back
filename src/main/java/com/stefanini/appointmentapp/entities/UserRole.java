@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * Role is an entity that represents roles that users may have.
@@ -27,7 +29,9 @@ public class UserRole {
 	
 	@OneToMany(mappedBy = "id")
 	private Set<User> users = new HashSet<>();
-	
+
+	@NotNull
+	@NotBlank(message = "Error: Role name must not be blank!")
 	@Column(name = "name")
 	private RoleName name;
 	

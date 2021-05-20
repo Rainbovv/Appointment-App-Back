@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * Profile is an entity that represents personal and public information about a users.
@@ -25,16 +27,21 @@ public class UserProfile {
 			joinColumns = { @JoinColumn(name = "doctor_id") }, 
 			inverseJoinColumns = { @JoinColumn(name = "speciality_id")})
 	private Set<Speciality> specialities;
-	
+
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private User user;
-	
+
+	@NotNull
+	@NotBlank
 	@Column(name = "first_name")
 	private String firstName;
-	
+
+	@NotNull
+	@NotBlank
 	@Column(name = "last_name")
 	private String lastName;
-	
+
 	@Column(name = "about")
 	private String about;
 	
@@ -46,14 +53,16 @@ public class UserProfile {
 	
 	@Column(name = "office")
 	private int office;
-	
+
+	@NotBlank(message = "Error: email must not be blank!")
+	@NotNull
 	@Column(name = "email")
 	private String email;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "schedule")
 	private WeeklySchedule schedule;
-	
+
 	@Column(name = "date_of_birth")
 	private LocalDateTime dateOfBirth;
 	
@@ -62,11 +71,11 @@ public class UserProfile {
 	
 	@Column(name = "social_number")
 	private String socialNumber;
-	
+
 	@Column(name = "gender")
 	private String gender;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	@JoinColumn(name = "holiday", referencedColumnName = "id")
 	private Set<Holiday> holidays = new HashSet<>();
 

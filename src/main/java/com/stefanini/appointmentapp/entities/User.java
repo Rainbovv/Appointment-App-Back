@@ -1,7 +1,13 @@
 package com.stefanini.appointmentapp.entities;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.lang.NonNull;
+
 import java.time.LocalDateTime;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * User is an entity that represents a base user class.
@@ -16,23 +22,29 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	
+
+	@NotNull
 	@Column(name = "login", unique = true)
 	private String login;
-	
+
+	@NotNull
 	@Column(name = "password")
 	private String password;
-	
+
+	@CreationTimestamp
 	@Column(name = "created")
 	private LocalDateTime created;
-	
+
+	@UpdateTimestamp
 	@Column(name = "last_update")
 	private LocalDateTime lastUpdate;
-	
+
+	@NotNull
 	@Column(name = "status")
 	private int status;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@NotNull
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "role_id")
 	private UserRole role;
 
