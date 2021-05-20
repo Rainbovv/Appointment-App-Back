@@ -2,7 +2,7 @@ package com.stefanini.appointmentapp.service;
 
 import com.stefanini.appointmentapp.entities.Department;
 
-import java.util.Set;
+import java.util.List;
 
 public interface DepartmentService {
     /**
@@ -11,7 +11,7 @@ public interface DepartmentService {
      * @return departments set
      * @author Igor Filipenco
      */
-    Set<Department> findAll();
+    List<Department> findAll();
 
     /**
      * Method finds department by id

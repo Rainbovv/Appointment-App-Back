@@ -1,69 +1,49 @@
 package com.stefanini.appointmentapp.aspect;
 
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Aspect
 @Component
 public class LogMethodAspect {
-    private final Logger LOGGER = LoggerFactory.getLogger(LogMethodAspect.class);
+    private Logger logger;
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
-    @Pointcut("@annotation(com.stefanini.appointmentapp.annotation.Loggable)")
-    public void log() {
-    }
+    @Around(value = "@annotation(com.stefanini.appointmentapp.annotation.Loggable)")
+    public <T> T logging(ProceedingJoinPoint pJoinPoint) {
 
-    @Before(value = "log()")
-    public void logBeforeMethodExecution(JoinPoint joinPoint) {
-        Class<?> executingClass = joinPoint.getThis().getClass();
-        Object[] methodParams = joinPoint.getArgs();
-        String className = executingClass.getName();
-        String methodName = joinPoint.getSignature().getName();
+        T object = null;
+
+        logger = LoggerFactory.getLogger(pJoinPoint.getSignature().getDeclaringTypeName());
+        Object[] args = pJoinPoint.getArgs();
+        String methodName = pJoinPoint.getSignature().getName() + "()";
         String timeStamp = "[" + dateFormat.format(new Date()) + "]";
 
-        if (methodParams.length == 0) {
-            LOGGER.info(timeStamp
-                    + " - Executing before void method: "
-                    + methodName
-                    + " with passed params: in "
-                    + " - [" + className + "]");
-        } else {
-            LOGGER.info(timeStamp
-                    + " - Executing before method: "
-                    + methodName
-                    + " with passed params: ");
+        logger.info(timeStamp
+                + " - Executing method "
+                + methodName
+                + " - With passed args: ");
 
-            for (Object obj : methodParams) {
-                LOGGER.info(timeStamp + " - " + obj.toString());
-            }
-
-            LOGGER.info(timeStamp + " - in " + " - [" + className + "]");
+        for (Object obj : args) {
+            logger.info(timeStamp + "- " + obj.toString());
         }
-    }
+        System.out.println();
 
-    @After(value = "log()")
-    public void logAfterMethodExecution(JoinPoint joinPoint) {
-        Class<?> executingClass = joinPoint.getThis().getClass();
-        Object[] methodParams = joinPoint.getArgs();
-        String className = executingClass.getName();
-        String methodName = joinPoint.getSignature().getName();
-        String timeStamp = "[" + dateFormat.format(new Date()) + "]";
-
-        if (methodParams.length > 0) {
-            LOGGER.info(timeStamp
-                    + " - Execution after method: "
-                    + methodName + " returned params: "
-                    + methodParams[0].toString()
-                    + " in " + " - [" + className + "]");
+        try {
+            object = (T) pJoinPoint.proceed();
         }
+        catch (Throwable exception) {
+            logger.error(exception.getMessage());
+        }
+        logger = LoggerFactory.getLogger(pJoinPoint.getSignature().getDeclaringTypeName());
+        logger.info(timeStamp + " - Method " + methodName +" - Returning value: " + object);
+        System.out.println();
+
+        return object;
     }
 }

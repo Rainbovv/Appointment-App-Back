@@ -6,10 +6,9 @@ import com.stefanini.appointmentapp.entities.Speciality;
 import com.stefanini.appointmentapp.service.DepartmentService;
 import com.stefanini.appointmentapp.service.SpecialityService;
 import org.springframework.stereotype.Service;
-
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
-import java.util.Set;
+import java.util.List;
 
 
 @Service
@@ -24,7 +23,7 @@ public class SpecialityServiceImpl implements SpecialityService {
 
     @Loggable
     @Override
-    public Set<Speciality> findAll() {
+    public List<Speciality> findAll() {
         return specialityDAO.findAll();
     }
 

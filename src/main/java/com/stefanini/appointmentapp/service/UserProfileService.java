@@ -1,11 +1,12 @@
 package com.stefanini.appointmentapp.service;
 
-import java.util.Set;
+import java.util.List;
+
 
 import com.stefanini.appointmentapp.entities.UserProfile;
 
 public interface UserProfileService {
-	Set<UserProfile> findAll();
+	List<UserProfile> findAll();
 	
 	UserProfile create(UserProfile profile);
 	
