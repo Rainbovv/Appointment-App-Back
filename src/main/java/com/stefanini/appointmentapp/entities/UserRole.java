@@ -1,17 +1,14 @@
 package com.stefanini.appointmentapp.entities;
 
 import com.stefanini.appointmentapp.entities.enums.RoleName;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * Role is an entity that represents roles that users may have.
@@ -26,12 +23,8 @@ public class UserRole {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Long id;
-	
-	@OneToMany(mappedBy = "id")
-	private Set<User> users = new HashSet<>();
 
-	@NotNull
-	@NotBlank(message = "Error: Role name must not be blank!")
+	@Enumerated(value = EnumType.STRING)
 	@Column(name = "name")
 	private RoleName name;
 	
@@ -51,24 +44,6 @@ public class UserRole {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-	
-	/**
-	 * Gets users.
-	 * @return Set<User>
-	 */
-
-	public Set<User> getUsers() {
-		return users;
-	}
-	
-	/**
-	 * Sets users.
-	 * @param users Set<User>
-	 */
-
-	public void setUsers(Set<User> users) {
-		this.users = users;
 	}
 	
 	/**
@@ -93,7 +68,6 @@ public class UserRole {
 	public String toString() {
 		return "Role{" +
 				"id=" + id +
-				", users=" + users +
 				", name='" + name + '\'' +
 				'}';
 	}
