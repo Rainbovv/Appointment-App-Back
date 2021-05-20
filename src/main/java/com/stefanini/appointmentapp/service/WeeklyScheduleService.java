@@ -2,7 +2,7 @@ package com.stefanini.appointmentapp.service;
 
 import com.stefanini.appointmentapp.entities.WeeklySchedule;
 
-import java.util.Set;
+import java.util.List;
 
 public interface WeeklyScheduleService {
 
@@ -12,21 +12,21 @@ public interface WeeklyScheduleService {
      * @param weeklySchedule Instance of WeeklySchedule
      * @return Instance of WeeklySchedule
      */
-    public WeeklySchedule create(WeeklySchedule weeklySchedule);
+    WeeklySchedule create(WeeklySchedule weeklySchedule);
 
     /**
      * Merge the state of the given entity into the current persistence context.
      * @param weeklySchedule Instance of WeeklySchedule
      * @return Instance of WeeklySchedule
      */
-    public WeeklySchedule update(WeeklySchedule weeklySchedule);
+    WeeklySchedule update(WeeklySchedule weeklySchedule);
 
     /**
      * Remove the WeeklySchedule instance if it is a managed entity instance
      * belonging to the current persistence context.
      * @param weeklySchedule Instance of WeeklySchedule
      */
-    public void delete(WeeklySchedule weeklySchedule);
+    void delete(WeeklySchedule weeklySchedule);
 
     /**
      * Create an instance of Query for executing a Java Persistence query language statement.
@@ -34,12 +34,12 @@ public interface WeeklyScheduleService {
      * @param id Long
      * @return Instance of WeeklySchedule
      */
-    public WeeklySchedule findById(Long id);
+    WeeklySchedule findById(Long id);
 
     /**
      * Create an instance of Query for executing a Java Persistence query language statement.
      * Find all instances of WeeklySchedule.
      * @return Set&lt;WeeklyScheduleT&gt;
      */
-    public Set<WeeklySchedule> findAll();
+    List<WeeklySchedule> findAll();
 }

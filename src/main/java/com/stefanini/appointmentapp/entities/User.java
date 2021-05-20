@@ -2,11 +2,9 @@ package com.stefanini.appointmentapp.entities;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -63,8 +61,6 @@ public class User {
 	 * Gets id.
 	 * @return Long
 	 */
-	
-	
 
 	public Long getId() {
 		return id;

@@ -1,9 +1,14 @@
 package com.stefanini.appointmentapp.dao;
 
-import java.util.Set;
+import java.util.List;
 
 public interface GenericDAO<T> {
 
+    /**
+     *
+     * @param t an entity to persist
+     * @return persisted t entity
+     */
     T create(T t);
 
     T update(T t);
@@ -12,5 +17,5 @@ public interface GenericDAO<T> {
 
     T findById(Long id);
 
-    Set<T> findAll();
+    List<T> findAll();
 }

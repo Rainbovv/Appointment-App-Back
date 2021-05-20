@@ -5,10 +5,9 @@ import com.stefanini.appointmentapp.dao.DepartmentDAO;
 import com.stefanini.appointmentapp.entities.Department;
 import com.stefanini.appointmentapp.service.DepartmentService;
 import org.springframework.stereotype.Service;
-
 import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
-import java.util.Set;
+import java.util.List;
 
 
 @Service
@@ -21,7 +20,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     @Loggable
-    public Set<Department> findAll() {
+    public List<Department> findAll() {
         return departmentDAO.findAll();
     }
 

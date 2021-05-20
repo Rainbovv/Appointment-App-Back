@@ -1,34 +1,42 @@
 package com.stefanini.appointmentapp.dao.impl;
 
+import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dao.GenericDAO;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
+
 
 public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 
     @PersistenceContext
     protected EntityManager entityManager;
+
     protected abstract Class<T> getEntityClass();
 
+    @Loggable
     @Override
     public T create(T entity) {
 
-        entityManager.persist(entity);
-        entityManager.flush();
+        try {
+            entityManager.persist(entity);
+            entityManager.flush();
+        } catch (Exception ignored) {
 
+        }
         return entity;
     }
 
+    @Loggable
     @Override
     public T update(T entity) {
 
         return entityManager.merge(entity);
     }
 
+    @Loggable
     @Override
     public void delete(T entity) {
 
@@ -36,6 +44,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
                 entity : entityManager.merge(entity));
     }
 
+    @Loggable
     @Override
     public T findById(Long id) {
         Query query = entityManager.createQuery(
@@ -45,11 +54,12 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
         return (T)query.getSingleResult();
     }
 
+    @Loggable
     @Override
-    public Set<T> findAll() {
+    public List<T> findAll() {
         Query query = entityManager.createQuery(
                 "FROM " + getEntityClass().getName() );
 
-        return (Set<T>) query.getResultStream().collect(Collectors.toSet());
+        return (List<T>) query.getResultStream().collect(Collectors.toList());
     }
 }

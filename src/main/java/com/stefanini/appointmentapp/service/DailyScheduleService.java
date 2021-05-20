@@ -2,7 +2,7 @@ package com.stefanini.appointmentapp.service;
 
 import com.stefanini.appointmentapp.entities.DailySchedule;
 
-import java.util.Set;
+import java.util.List;
 
 public interface DailyScheduleService {
 
@@ -11,21 +11,21 @@ public interface DailyScheduleService {
      * @param dailySchedule Instance of DailySchedule
      * @return Instance of DailySchedule
      */
-    public DailySchedule create(DailySchedule dailySchedule);
+    DailySchedule create(DailySchedule dailySchedule);
 
     /**
      * Merge the state of the given entity into the current persistence context.
      * @param dailySchedule Instance of DailySchedule
      * @return Instance of DailySchedule
      */
-    public DailySchedule update(DailySchedule dailySchedule);
+    DailySchedule update(DailySchedule dailySchedule);
 
     /**
      * Remove the DailySchedule instance if it is a managed entity instance
      * belonging to the current persistence context.
      * @param dailySchedule Instance of DailySchedule
      */
-    public void delete(DailySchedule dailySchedule);
+    void delete(DailySchedule dailySchedule);
 
     /**
      * Create an instance of Query for executing a Java Persistence query language statement.
@@ -33,12 +33,12 @@ public interface DailyScheduleService {
      * @param id Long
      * @return Instance of DailySchedule.
      */
-    public DailySchedule findById(Long id);
+    DailySchedule findById(Long id);
 
     /**
      * Create an instance of Query for executing a Java Persistence query language statement.
      * Find all instances of DailySchedule.
      * @return Set&lt;DailyScheduleT&gt;
      */
-    public Set<DailySchedule> findAll();
+    List<DailySchedule> findAll();
 }
