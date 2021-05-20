@@ -56,7 +56,7 @@ public class UserProfile {
 
 	@NotBlank(message = "Error: email must not be blank!")
 	@NotNull
-	@Column(name = "email")
+	@Column(name = "email", unique = true)
 	private String email;
 	
 	@ManyToOne
