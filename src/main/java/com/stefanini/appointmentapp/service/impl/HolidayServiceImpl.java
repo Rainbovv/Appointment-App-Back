@@ -1,12 +1,12 @@
 package com.stefanini.appointmentapp.service.impl;
 
+import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dao.HolidayDao;
 import com.stefanini.appointmentapp.entities.Holiday;
 import com.stefanini.appointmentapp.service.HolidayService;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
-import java.util.Set;
+import java.util.List;
 
 @Service
 public class HolidayServiceImpl implements HolidayService {
@@ -21,31 +21,36 @@ public class HolidayServiceImpl implements HolidayService {
         this.holidayDao = holidayDao;
     }
 
+    @Loggable
     @Transactional
     @Override
     public Holiday create(Holiday holiday) {
         return holidayDao.create(holiday);
     }
 
+    @Loggable
     @Transactional
     @Override
     public Holiday update(Holiday holiday) {
         return holidayDao.update(holiday);
     }
 
+    @Loggable
     @Transactional
     @Override
     public void delete(Holiday holiday) {
         holidayDao.delete(holiday);
     }
 
+    @Loggable
     @Override
     public Holiday findById(Long id) {
         return holidayDao.findById(id);
     }
 
+    @Loggable
     @Override
-    public Set<Holiday> findAll() {
+    public List<Holiday> findAll() {
         return holidayDao.findAll();
     }
 }

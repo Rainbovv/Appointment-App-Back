@@ -1,19 +1,15 @@
 package com.stefanini.appointmentapp.controller;
 
+import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.entities.User;
 import com.stefanini.appointmentapp.service.UserService;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/users")
 public class UserController {
-	
-	Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private UserService userService;
 
@@ -21,30 +17,35 @@ public class UserController {
         this.userService = userService;
     }
 
+    @Loggable
     @GetMapping("")
-    Set<User> findAll() {
-
+    List<User> findAll() {
         return userService.findAll();
     }
 
+    @Loggable
     @GetMapping("/{id}")
     User findById(@PathVariable Long id) {
 
         return userService.findById(id);
     }
 
+    @Loggable
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     User create(@RequestBody User user) {
-    	logger.info(user.toString());
+
         return userService.create(user);
+
     }
 
+    @Loggable
     @PutMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     User update(@RequestBody User user) {
 
         return userService.update(user);
     }
 
+    @Loggable
     @DeleteMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     void delete(@RequestBody User user) {
 

@@ -1,11 +1,11 @@
 package com.stefanini.appointmentapp.service;
 
-import java.util.Set;
+import java.util.List;
 
 import com.stefanini.appointmentapp.entities.UserRole;
 
 public interface UserRoleService {
-	Set<UserRole> findAll();
+	List<UserRole> findAll();
 	
 	UserRole create(UserRole userRole);
 	

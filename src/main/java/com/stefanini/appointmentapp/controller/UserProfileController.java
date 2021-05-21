@@ -1,7 +1,7 @@
 package com.stefanini.appointmentapp.controller;
 
-import java.util.Set;
-
+import java.util.List;
+import com.stefanini.appointmentapp.annotation.Loggable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.stefanini.appointmentapp.entities.UserProfile;
 import com.stefanini.appointmentapp.service.UserProfileService;
 
@@ -25,27 +24,32 @@ public class UserProfileController {
 	public UserProfileController(UserProfileService profileService) {
 		this.profileService = profileService;
 	}
-	
+
+	@Loggable
 	@GetMapping
-	public Set<UserProfile> getProfiles() {
+	public List<UserProfile> getProfiles() {
 		return profileService.findAll();
 	}
-	
+
+	@Loggable
 	@GetMapping("/{id}")
 	public UserProfile getProfileById(@PathVariable Long id) {
 		return profileService.findById(id);
 	}
-	
+
+	@Loggable
 	@PostMapping
 	public UserProfile createNewProfile(@RequestBody UserProfile profile) {
 		return profileService.create(profile);
 	}
-	
+
+	@Loggable
 	@PutMapping("/{id}")
 	public UserProfile updateProfile(@RequestBody UserProfile profile) {
 		return profileService.update(profile);
 	}
-	
+
+	@Loggable
 	@DeleteMapping("/{id}")
 	public void deleteProfile(@RequestBody UserProfile profile) {
 		profileService.delete(profile);

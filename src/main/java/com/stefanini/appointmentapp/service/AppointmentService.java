@@ -1,14 +1,13 @@
 package com.stefanini.appointmentapp.service;
 
 import com.stefanini.appointmentapp.entities.Appointment;
-
-import java.util.Set;
+import java.util.List;
 
 public interface AppointmentService {
 
-    public Appointment create(Appointment appointment);
-    public Appointment update(Appointment appointment);
-    public void delete(Appointment appointment);
-    public Appointment findById(Long id);
-    public Set<Appointment> findAll();
+    Appointment create(Appointment appointment);
+    Appointment update(Appointment appointment);
+    void delete(Appointment appointment);
+    Appointment findById(Long id);
+    List<Appointment> findAll();
 }

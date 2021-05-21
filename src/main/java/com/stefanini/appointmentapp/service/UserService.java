@@ -2,13 +2,13 @@ package com.stefanini.appointmentapp.service;
 
 import com.stefanini.appointmentapp.entities.User;
 
-import java.util.Set;
+import java.util.List;
 
 public interface UserService {
 
-    public User create(User user);
-    public User update(User user);
-    public void delete(User user);
-    public User findById(Long id);
-    public Set<User> findAll();
+    User create(User user);
+    User update(User user);
+    void delete(User user);
+    User findById(Long id);
+    List<User> findAll();
 }

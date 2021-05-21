@@ -2,7 +2,7 @@ package com.stefanini.appointmentapp.service;
 
 import com.stefanini.appointmentapp.entities.Speciality;
 
-import java.util.Set;
+import java.util.List;
 
 
 public interface SpecialityService {
@@ -12,7 +12,7 @@ public interface SpecialityService {
      * @return specialities set
      * @author Igor Filipenco
      */
-    Set<Speciality> findAll();
+    List<Speciality> findAll();
 
     /**
      * Method finds speciality by id

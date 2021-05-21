@@ -1,8 +1,7 @@
 package com.stefanini.appointmentapp.entities;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -26,7 +25,7 @@ public class UserProfile {
 			name = "doctors_speciality", 
 			joinColumns = { @JoinColumn(name = "doctor_id") }, 
 			inverseJoinColumns = { @JoinColumn(name = "speciality_id")})
-	private Set<Speciality> specialities;
+	private List<Speciality> specialities;
 
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -77,7 +76,7 @@ public class UserProfile {
 	
 	@OneToMany
 	@JoinColumn(name = "holiday", referencedColumnName = "id")
-	private Set<Holiday> holidays = new HashSet<>();
+	private List<Holiday> holidays;
 
 	
 	/**
@@ -331,24 +330,31 @@ public class UserProfile {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	
-	/**
-	 * Gets holiday.
-	 * @return Set<Holiday>
-	 */
 
-	public Set<Holiday> getHoliday() {
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<Speciality> getSpecialities() {
+		return specialities;
+	}
+
+	public void setSpecialities(List<Speciality> specialities) {
+		this.specialities = specialities;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public List<Holiday> getHolidays() {
 		return holidays;
 	}
-	
-	/**
-	 * Set holiday.
-	 * @param holidays Set<Holiday>
-	 */
 
-	public void setHoliday(Set<Holiday> holidays) {
+	public void setHolidays(List<Holiday> holidays) {
 		this.holidays = holidays;
 	}
+
 
 	@Override
 	public String toString() {

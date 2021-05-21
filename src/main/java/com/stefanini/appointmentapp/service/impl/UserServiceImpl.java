@@ -1,11 +1,11 @@
 package com.stefanini.appointmentapp.service.impl;
 
+import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dao.UserDao;
 import com.stefanini.appointmentapp.entities.User;
 import com.stefanini.appointmentapp.service.UserService;
 import org.springframework.stereotype.Service;
-import java.util.Set;
-
+import java.util.List;
 import javax.transaction.Transactional;
 
 @Service
@@ -17,31 +17,37 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
     }
 
+    @Loggable
     @Transactional
     @Override
     public User create(User user) {
+
         return userDao.create(user);
     }
 
+    @Loggable
     @Transactional
     @Override
     public User update(User user) {
         return userDao.update(user);
     }
 
+    @Loggable
     @Transactional
     @Override
     public void delete(User user) {
         userDao.delete(user);
     }
 
+    @Loggable
     @Override
     public User findById(Long id) {
         return userDao.findById(id);
     }
 
+    @Loggable
     @Override
-    public Set<User> findAll() {
+    public List<User> findAll() {
         return userDao.findAll();
     }
 }
