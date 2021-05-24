@@ -50,4 +50,10 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() {
         return userDao.findAll();
     }
+    
+    @Loggable
+    @Override
+    public User findByLogin(String login) {
+    	return userDao.findUserByLogin(login);
+    }
 }
