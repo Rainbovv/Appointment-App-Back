@@ -11,7 +11,7 @@ import java.util.*;
 @Configuration
 public class EntityManagerFactory {
 
-    private Environment environment;
+    private final Environment environment;
 
     public EntityManagerFactory(Environment environment) {
         this.environment = environment;

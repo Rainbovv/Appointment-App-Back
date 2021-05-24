@@ -12,8 +12,7 @@ import com.stefanini.appointmentapp.service.UserRoleService;
 public class UserRoleServiceImpl implements UserRoleService {
 	
 	private final UserRoleDAO userRoleDAO;
-	
-	
+
 
 	public UserRoleServiceImpl(UserRoleDAO userRoleDAO) {
 		this.userRoleDAO = userRoleDAO;

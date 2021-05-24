@@ -1,7 +1,6 @@
 package com.stefanini.appointmentapp.service;
 
 import java.util.List;
-
 import com.stefanini.appointmentapp.entities.UserRole;
 
 public interface UserRoleService {

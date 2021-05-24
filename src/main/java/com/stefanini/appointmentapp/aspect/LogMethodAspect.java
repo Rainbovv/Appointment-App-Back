@@ -15,11 +15,11 @@ public class LogMethodAspect {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
     @Around(value = "@annotation(com.stefanini.appointmentapp.annotation.Loggable)")
-    public <T> T logging(ProceedingJoinPoint pJoinPoint) {
+    public <T> Object logging(ProceedingJoinPoint pJoinPoint) {
 
-        T object = null;
+        Object object = null;
 
-        logger = LoggerFactory.getLogger(pJoinPoint.getSignature().getDeclaringTypeName());
+        switchLogger(pJoinPoint.getSignature().getDeclaringTypeName());
         Object[] args = pJoinPoint.getArgs();
         String methodName = pJoinPoint.getSignature().getName() + "()";
         String timeStamp = "[" + dateFormat.format(new Date()) + "]";
@@ -35,15 +35,19 @@ public class LogMethodAspect {
         System.out.println();
 
         try {
-            object = (T) pJoinPoint.proceed();
+            object = pJoinPoint.proceed();
         }
         catch (Throwable exception) {
-            logger.error(exception.getMessage());
+            switchLogger(pJoinPoint.getSignature().getDeclaringTypeName());
+            logger.error(exception.getMessage()+"\n");
         }
-        logger = LoggerFactory.getLogger(pJoinPoint.getSignature().getDeclaringTypeName());
-        logger.info(timeStamp + " - Method " + methodName +" - Returning value: " + object);
-        System.out.println();
+        switchLogger(pJoinPoint.getSignature().getDeclaringTypeName());
+        logger.info(timeStamp + " - Method " + methodName +" - Returning value: " + object + "\n");
 
         return object;
+    }
+
+    private void switchLogger(String name) {
+        this.logger = LoggerFactory.getLogger(name);
     }
 }

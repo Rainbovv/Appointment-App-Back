@@ -4,6 +4,7 @@ import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dao.UserDao;
 import com.stefanini.appointmentapp.entities.User;
 import com.stefanini.appointmentapp.service.UserService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -12,9 +13,11 @@ import javax.transaction.Transactional;
 public class UserServiceImpl implements UserService {
 
     UserDao userDao;
+    BCryptPasswordEncoder encoder;
 
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao, BCryptPasswordEncoder encoder) {
         this.userDao = userDao;
+        this.encoder = encoder;
     }
 
     @Loggable
@@ -22,6 +25,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(User user) {
 
+        user.setPassword(encoder.encode(user.getPassword()));
         return userDao.create(user);
     }
 
@@ -43,6 +47,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(Long id) {
         return userDao.findById(id);
+    }
+
+    @Loggable
+    @Override
+    public User findByLogin(String login) {
+        return userDao.findByLogin(login);
     }
 
     @Loggable
