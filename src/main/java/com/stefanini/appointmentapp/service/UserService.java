@@ -1,14 +1,20 @@
 package com.stefanini.appointmentapp.service;
 
+import com.stefanini.appointmentapp.dto.RegistrationRequestDto;
 import com.stefanini.appointmentapp.entities.User;
 
 import java.util.Set;
 
 public interface UserService {
+    User create(RegistrationRequestDto user);
 
-    public User create(User user);
-    public User update(User user);
-    public void delete(User user);
-    public User findById(Long id);
-    public Set<User> findAll();
+    User update(User user);
+
+    void delete(User user);
+
+    User findById(Long id);
+
+    User findByLogin(String login);
+
+    Set<User> findAll();
 }

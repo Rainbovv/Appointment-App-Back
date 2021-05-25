@@ -3,6 +3,7 @@ package com.stefanini.appointmentapp.controller;
 import com.stefanini.appointmentapp.entities.Appointment;
 import com.stefanini.appointmentapp.service.AppointmentService;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
@@ -40,6 +41,7 @@ public class AppointmentController {
         return appointmentService.update(appointment);
     }
 
+    @PreAuthorize("hasRole('ROLE_DOCTOR')")
     @DeleteMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     void delete(@RequestBody Appointment appointment) {
 
