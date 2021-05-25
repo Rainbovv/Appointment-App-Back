@@ -1,21 +1,18 @@
 package com.stefanini.appointmentapp.service.impl;
 
+import com.stefanini.appointmentapp.dto.RegistrationRequestDto;
+import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dao.UserDao;
 import com.stefanini.appointmentapp.dao.UserProfileDAO;
 import com.stefanini.appointmentapp.dao.UserRoleDAO;
-import com.stefanini.appointmentapp.dto.RegistrationRequestDto;
 import com.stefanini.appointmentapp.entities.User;
 import com.stefanini.appointmentapp.entities.UserProfile;
-import com.stefanini.appointmentapp.entities.UserRole;
 import com.stefanini.appointmentapp.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Set;
 
 
 @Service
@@ -32,6 +29,14 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Loggable
+    @Transactional
+    @Override
+    public User create(User user) {
+        return userDao.create(user);
+    }
+
+    @Loggable
     @Transactional
     @Override
     public User create(RegistrationRequestDto dto) {
@@ -43,30 +48,33 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Loggable
     @Transactional
     @Override
     public User update(User user) {
         return userDao.update(user);
     }
 
-    @Transactional
+    @Loggable
     @Override
     public void delete(User user) {
         userDao.delete(user);
     }
 
+    @Loggable
     @Override
     public User findById(Long id) {
         return userDao.findById(id);
     }
 
+    @Loggable
     @Override
     public User findByLogin(String login) {
         return userDao.findByLogin(login);
     }
 
     @Override
-    public Set<User> findAll() {
+    public List<User> findAll() {
         return userDao.findAll();
     }
 
@@ -77,11 +85,9 @@ public class UserServiceImpl implements UserService {
         if (Objects.isNull(roleId)) {
             throw new IllegalArgumentException("Registration error: user role was not specified");
         }
-
-        UserRole userRole = userRoleDAO.findById(roleId);
         user.setLogin(userDto.getLogin());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setRoles(new ArrayList<>(Arrays.asList(userRole)));
+        user.setRoles(Collections.singletonList(userRoleDAO.findById(roleId)));
         user.setStatus(userDto.getStatus());
 
         return user;

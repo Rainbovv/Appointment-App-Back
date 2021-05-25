@@ -1,5 +1,6 @@
 package com.stefanini.appointmentapp.security.userdetails;
 
+import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dto.AuthenticationRequestDto;
 import com.stefanini.appointmentapp.dto.AuthenticationResponseDto;
 import com.stefanini.appointmentapp.entities.User;
@@ -25,6 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.userService = userService;
     }
 
+    @Loggable
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         User user = userService.findByLogin(login);
@@ -33,13 +35,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("User with login " + login + " not exists");
         }
 
-        CustomUserDetails userDetails = CustomUserDetailsFactory.create(user);
-
-        return userDetails;
+        return CustomUserDetailsFactory.create(user);
     }
 
+    @Loggable
     public AuthenticationResponseDto login(AuthenticationRequestDto requestDto) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(requestDto.getLogin(), requestDto.getPassword()));
+
         String token = jwtTokenProvider.createToken(authentication);
 
         return new AuthenticationResponseDto(requestDto.getLogin(), token);

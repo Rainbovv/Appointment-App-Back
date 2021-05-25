@@ -1,5 +1,6 @@
 package com.stefanini.appointmentapp.controller;
 
+import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dto.AuthenticationRequestDto;
 import com.stefanini.appointmentapp.dto.AuthenticationResponseDto;
 import com.stefanini.appointmentapp.security.userdetails.UserDetailsServiceImpl;
@@ -23,11 +24,13 @@ public class AuthenticationController {
         this.userDetailsService = userDetailsService;
     }
 
+    @Loggable
     @PostMapping("/login")
     public AuthenticationResponseDto login(@RequestBody AuthenticationRequestDto requestDto) {
         return ((UserDetailsServiceImpl)userDetailsService).login(requestDto);
     }
 
+    @Loggable
     @PostMapping("/logout")
     public void logout(HttpServletRequest request, HttpServletResponse response) {
         SecurityContextLogoutHandler securityContext = new SecurityContextLogoutHandler();
