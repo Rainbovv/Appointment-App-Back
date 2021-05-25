@@ -1,6 +1,7 @@
 package com.stefanini.appointmentapp.service;
 
 import com.stefanini.appointmentapp.entities.User;
+import com.stefanini.appointmentapp.security.DTO.SignUpRequestDto;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface UserService {
     List<User> findAll();
     
     User findByLogin(String login);
+	User registerNewUser(SignUpRequestDto signUpRequestDto);
 }

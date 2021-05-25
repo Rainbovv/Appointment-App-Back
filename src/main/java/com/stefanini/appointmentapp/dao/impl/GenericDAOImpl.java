@@ -5,6 +5,8 @@ import com.stefanini.appointmentapp.dao.GenericDAO;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +26,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
             entityManager.persist(entity);
             entityManager.flush();
         } catch (Exception ignored) {
-
+        	
         }
         return entity;
     }

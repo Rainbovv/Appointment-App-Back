@@ -22,17 +22,23 @@ import io.jsonwebtoken.security.Keys;
 
 public class JWTValidatorFilter extends OncePerRequestFilter{
 	
-	private static final String JWT_KEY = "jxgEQeXHuPq8VdbyYFNkANdudQ53YUn4";
-	private static final String JWT_HEADER = "Authorization";
+	private String secret;
+	private String header;
+	
+	public JWTValidatorFilter(String secret, String header) {
+		super();
+		this.secret = secret;
+		this.header = header;
+	}
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		String jwt = request.getHeader(JWT_HEADER);
+		String jwt = request.getHeader(header);
 		
 		if (jwt != null) {
 			try {
-				SecretKey key = Keys.hmacShaKeyFor(JWT_KEY.getBytes(StandardCharsets.UTF_8));
+				SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
 				
 				Claims claims = Jwts.parserBuilder()
 						.setSigningKey(key)
@@ -53,7 +59,7 @@ public class JWTValidatorFilter extends OncePerRequestFilter{
 	}
 	
 	@Override protected boolean shouldNotFilter(HttpServletRequest request) {
-		return request.getServletPath().equals("/api/login");
+		return request.getServletPath().equals("/api/sign-in") || request.getServletPath().equals("/api/sign-up");
 	}
 
 }

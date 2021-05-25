@@ -12,13 +12,13 @@ import com.stefanini.appointmentapp.entities.User;
 import com.stefanini.appointmentapp.service.UserService;
 
 @Service
-public class ApplicationUserDetails implements UserDetailsService{
+public class AppointmentUserDetails implements UserDetailsService{
 	
 	private final UserService userService;
-	Logger logger = LoggerFactory.getLogger(ApplicationUserDetails.class);
+	Logger logger = LoggerFactory.getLogger(AppointmentUserDetails.class);
 	
 	
-	public ApplicationUserDetails(UserService userService) {
+	public AppointmentUserDetails(UserService userService) {
 		this.userService = userService;
 	}
 
@@ -26,6 +26,7 @@ public class ApplicationUserDetails implements UserDetailsService{
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		logger.info("###############", username);
 		User user = userService.findByLogin(username);
 		if (user == null) {
 			throw new UsernameNotFoundException("User details not found for the user : " + username);
