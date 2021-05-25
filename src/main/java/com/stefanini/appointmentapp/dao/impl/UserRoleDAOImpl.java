@@ -1,9 +1,9 @@
 package com.stefanini.appointmentapp.dao.impl;
 
-import org.springframework.stereotype.Repository;
-
 import com.stefanini.appointmentapp.dao.UserRoleDAO;
 import com.stefanini.appointmentapp.entities.UserRole;
+import org.springframework.stereotype.Repository;
+
 
 @Repository
 public class UserRoleDAOImpl extends GenericDAOImpl<UserRole> implements UserRoleDAO {
@@ -12,5 +12,4 @@ public class UserRoleDAOImpl extends GenericDAOImpl<UserRole> implements UserRol
 	protected Class<UserRole> getEntityClass() {
 		return UserRole.class;
 	}
-
 }

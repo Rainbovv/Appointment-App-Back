@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+
 @RestController
 @RequestMapping("api/users")
 public class UserController {
@@ -26,7 +27,6 @@ public class UserController {
     @Loggable
     @GetMapping("/{id}")
     User findById(@PathVariable Long id) {
-
         return userService.findById(id);
     }
 
