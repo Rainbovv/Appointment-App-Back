@@ -2,7 +2,7 @@ package com.stefanini.appointmentapp.security.jwt.service;
 
 import com.stefanini.appointmentapp.dao.UserDao;
 import com.stefanini.appointmentapp.entities.User;
-import com.stefanini.appointmentapp.security.jwt.entity.JwtUserFactory;
+import com.stefanini.appointmentapp.security.jwt.entity.JwtUser;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,6 +26,6 @@ public class JwtUserService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found!");
         }
 
-        return JwtUserFactory.create(user);
+        return new JwtUser(user);
     }
 }

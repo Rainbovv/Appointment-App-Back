@@ -1,4 +1,4 @@
-package com.stefanini.appointmentapp.security.jwt;
+package com.stefanini.appointmentapp.security.jwt.token;
 
 import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.entities.UserRole;
@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -58,20 +57,12 @@ public class JwtTokenProvider {
     public Authentication getAuthentication(String token) {
 
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(getUserName(token));
+
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
     public String getUserName(String token) {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
-    }
-
-    public String resolveToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-
-        if (bearerToken != null && bearerToken.startsWith("Bearer_")) {
-            return bearerToken.substring(7);
-        }
-        return null;
     }
 
     public boolean validateToken(String token) {
@@ -88,7 +79,7 @@ public class JwtTokenProvider {
     @Loggable
     private List<String> getRoleNames(List<UserRole> userRoles) {
         List<String> result = new ArrayList<>();
-        userRoles.forEach(r -> result.add(r.getName().toString()));
+        userRoles.forEach(r -> result.add(r.getName().name()));
 
         return result;
     }

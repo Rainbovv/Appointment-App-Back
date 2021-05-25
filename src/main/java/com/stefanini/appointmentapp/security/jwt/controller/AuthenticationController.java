@@ -3,7 +3,7 @@ package com.stefanini.appointmentapp.security.jwt.controller;
 import com.stefanini.appointmentapp.entities.User;
 import com.stefanini.appointmentapp.security.jwt.dto.AuthenticationRequestDTO;
 import com.stefanini.appointmentapp.security.jwt.dto.AuthenticationResponseDTO;
-import com.stefanini.appointmentapp.security.jwt.JwtTokenProvider;
+import com.stefanini.appointmentapp.security.jwt.token.JwtTokenProvider;
 import com.stefanini.appointmentapp.service.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,7 +27,8 @@ public class AuthenticationController {
 
     private final UserService userService;
 
-    public AuthenticationController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService) {
+    public AuthenticationController(AuthenticationManager authenticationManager,
+                                    JwtTokenProvider jwtTokenProvider, UserService userService) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
         this.userService = userService;

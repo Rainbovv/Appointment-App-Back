@@ -1,4 +1,4 @@
-package com.stefanini.appointmentapp.security.jwt;
+package com.stefanini.appointmentapp.security.jwt.token;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,7 +19,9 @@ public class JwtTokenFilter extends GenericFilterBean {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+
         String token = ((HttpServletRequest)request).getHeader("Authorization");
 
         if (token !=null && jwtTokenProvider.validateToken(token)) {
