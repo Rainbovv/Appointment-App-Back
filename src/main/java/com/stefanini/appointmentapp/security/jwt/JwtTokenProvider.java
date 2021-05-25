@@ -1,18 +1,17 @@
 package com.stefanini.appointmentapp.security.jwt;
 
-import com.stefanini.appointmentapp.entities.UserRole;
 import com.stefanini.appointmentapp.security.userdetails.CustomUserDetails;
+import com.stefanini.appointmentapp.security.userdetails.CustomUserDetailsFactory;
+import com.stefanini.appointmentapp.service.UserService;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 
@@ -22,11 +21,10 @@ public class JwtTokenProvider {
     private String secret;
     @Value("${jwt.token.expired}")
     private long validityTimeMillis;
+    private UserService userService;
 
-    private UserDetailsService userDetailsService;
-
-    public JwtTokenProvider(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
+    public JwtTokenProvider(UserService userService) {
+        this.userService = userService;
     }
 
     @PostConstruct
@@ -65,19 +63,9 @@ public class JwtTokenProvider {
         }
     }
 
-    public String resolveToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-
-        if (bearerToken != null && bearerToken.startsWith("Bearer_")) {
-            return bearerToken.substring(7, bearerToken.length());
-        }
-
-        return null;
-    }
-
     public Authentication getAuthentication(String token) {
         String userLogin = getUserLogin(token);
-        UserDetails userDetails = this.userDetailsService.loadUserByUsername(userLogin);
+        UserDetails userDetails = CustomUserDetailsFactory.create(userService.findByLogin(userLogin));
 
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
