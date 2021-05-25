@@ -31,7 +31,7 @@ public class DepartmentController {
         return departmentService.findById(departmentId);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PostMapping(value ="/departments", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Department create(@RequestBody Department department) {
         return departmentService.create(department);
