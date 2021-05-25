@@ -35,7 +35,6 @@ public class UserController {
     User create(@RequestBody User user) {
 
         return userService.create(user);
-
     }
 
     @Loggable

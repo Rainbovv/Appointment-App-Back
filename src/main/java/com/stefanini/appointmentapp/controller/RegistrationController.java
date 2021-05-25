@@ -1,10 +1,12 @@
 package com.stefanini.appointmentapp.controller;
 
+import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dto.AuthenticationRequestDto;
 import com.stefanini.appointmentapp.dto.AuthenticationResponseDto;
 import com.stefanini.appointmentapp.dto.RegistrationRequestDto;
 import com.stefanini.appointmentapp.security.userdetails.UserDetailsServiceImpl;
 import com.stefanini.appointmentapp.service.UserService;
+import com.stefanini.appointmentapp.service.impl.UserServiceImpl;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +26,8 @@ public class RegistrationController {
         this.userDetailsService = userDetailsService;
     }
 
-    @PostMapping(value = "/user/registration", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Loggable
+    @PostMapping(value = "/users/registration", consumes = MediaType.APPLICATION_JSON_VALUE)
     AuthenticationResponseDto create(@RequestBody RegistrationRequestDto requestDto) {
         userService.create(requestDto);
 

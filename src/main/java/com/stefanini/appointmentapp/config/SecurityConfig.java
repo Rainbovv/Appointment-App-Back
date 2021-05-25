@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .httpBasic().disable()
-                .authorizeRequests().antMatchers("/api/auth/login", "/api/user/registration").permitAll()
+                .authorizeRequests().antMatchers("/api/auth/login", "/api/users/registration").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .and()
                 .csrf().disable().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
