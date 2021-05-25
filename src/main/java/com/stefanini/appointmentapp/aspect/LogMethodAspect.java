@@ -15,9 +15,9 @@ public class LogMethodAspect {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
     @Around(value = "@annotation(com.stefanini.appointmentapp.annotation.Loggable)")
-    public <T> T logging(ProceedingJoinPoint pJoinPoint) {
+    public Object logging(ProceedingJoinPoint pJoinPoint) {
 
-        T object = null;
+        Object object = null;
 
         logger = LoggerFactory.getLogger(pJoinPoint.getSignature().getDeclaringTypeName());
         Object[] args = pJoinPoint.getArgs();
@@ -35,7 +35,7 @@ public class LogMethodAspect {
         System.out.println();
 
         try {
-            object = (T) pJoinPoint.proceed();
+            object = pJoinPoint.proceed();
         }
         catch (Throwable exception) {
             logger.error(exception.getMessage());
