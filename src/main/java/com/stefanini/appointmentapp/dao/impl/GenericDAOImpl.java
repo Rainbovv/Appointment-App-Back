@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
@@ -60,6 +59,6 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
         Query query = entityManager.createQuery(
                 "FROM " + getEntityClass().getName() );
 
-        return (List<T>) query.getResultStream().collect(Collectors.toList());
+        return query.getResultList();
     }
 }
