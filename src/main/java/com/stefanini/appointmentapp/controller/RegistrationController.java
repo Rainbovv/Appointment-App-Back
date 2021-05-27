@@ -27,7 +27,7 @@ public class RegistrationController {
     }
 
     @Loggable
-    @PostMapping(value = "/users/registration", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/auth/sign-up", consumes = MediaType.APPLICATION_JSON_VALUE)
     AuthenticationResponseDto create(@RequestBody RegistrationRequestDto requestDto) {
         userService.create(requestDto);
 

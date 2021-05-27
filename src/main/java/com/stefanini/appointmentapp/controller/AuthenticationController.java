@@ -25,13 +25,13 @@ public class AuthenticationController {
     }
 
     @Loggable
-    @PostMapping("/login")
+    @PostMapping("/sign-in")
     public AuthenticationResponseDto login(@RequestBody AuthenticationRequestDto requestDto) {
         return ((UserDetailsServiceImpl)userDetailsService).login(requestDto);
     }
 
     @Loggable
-    @PostMapping("/logout")
+    @PostMapping("/sign-out")
     public void logout(HttpServletRequest request, HttpServletResponse response) {
         SecurityContextLogoutHandler securityContext = new SecurityContextLogoutHandler();
         securityContext.logout(request, response, null);
