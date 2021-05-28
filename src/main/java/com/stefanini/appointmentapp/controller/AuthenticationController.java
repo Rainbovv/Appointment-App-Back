@@ -2,8 +2,11 @@ package com.stefanini.appointmentapp.controller;
 
 import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dto.AuthenticationRequestDto;
-import com.stefanini.appointmentapp.dto.AuthenticationResponseDto;
 import com.stefanini.appointmentapp.security.userdetails.UserDetailsServiceImpl;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +29,16 @@ public class AuthenticationController {
 
     @Loggable
     @PostMapping("/sign-in")
-    public AuthenticationResponseDto login(@RequestBody AuthenticationRequestDto requestDto) {
-        return ((UserDetailsServiceImpl)userDetailsService).login(requestDto);
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequestDto requestDto) {
+		try {
+			return ResponseEntity
+		            .status(HttpStatus.CREATED)                 
+		            .body(((UserDetailsServiceImpl)userDetailsService).login(requestDto));
+		} catch (AuthenticationException e) {
+			return ResponseEntity
+					.status(HttpStatus.FORBIDDEN)
+					.body("Invalid username or password");
+		}
     }
 
     @Loggable

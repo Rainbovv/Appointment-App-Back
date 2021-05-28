@@ -8,6 +8,7 @@ import com.stefanini.appointmentapp.dao.UserRoleDAO;
 import com.stefanini.appointmentapp.entities.User;
 import com.stefanini.appointmentapp.entities.UserProfile;
 import com.stefanini.appointmentapp.service.UserService;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -41,9 +42,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User create(RegistrationRequestDto dto) {
         User newUser = mapDtoToUser(dto);
-        UserProfile newUserProfile = mapDtoToUserProfile(dto);
-        newUserProfile.setUser(newUser);
-        userProfileDAO.create(newUserProfile);
+		UserProfile newUserProfile = mapDtoToUserProfile(dto);
+		newUserProfile.setUser(newUser);
+		userProfileDAO.create(newUserProfile);
 
         return null;
     }
