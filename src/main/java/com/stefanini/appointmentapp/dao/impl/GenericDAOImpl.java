@@ -4,11 +4,20 @@ import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dao.GenericDAO;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+
+import org.hibernate.exception.ConstraintViolationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.sql.SQLException;
 import java.util.List;
 
 
 public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
+	
+	Logger logger = LoggerFactory.getLogger(GenericDAOImpl.class);
 
     @PersistenceContext
     protected EntityManager entityManager;
@@ -18,13 +27,17 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
     @Loggable
     @Override
     public T create(T entity) {
-
-        try {
-            entityManager.persist(entity);
-            entityManager.flush();
-        } catch (Exception ignored) {
-
-        }
+    	
+    	
+    	
+       
+            
+		try {
+				entityManager.persist(entity);
+				entityManager.flush();
+			} catch (Exception e) {
+				
+			}
         return entity;
     }
 
