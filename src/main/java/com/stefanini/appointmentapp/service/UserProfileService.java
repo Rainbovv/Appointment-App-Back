@@ -2,7 +2,6 @@ package com.stefanini.appointmentapp.service;
 
 import java.util.List;
 
-
 import com.stefanini.appointmentapp.entities.UserProfile;
 
 public interface UserProfileService {
@@ -13,6 +12,8 @@ public interface UserProfileService {
 	UserProfile update(UserProfile profile);
 	
 	UserProfile findById(Long id);
+
+	UserProfile findByLogin(String login);
 	
 	void delete(UserProfile profile);
 }

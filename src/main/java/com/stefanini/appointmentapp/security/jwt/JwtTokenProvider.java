@@ -1,7 +1,11 @@
 package com.stefanini.appointmentapp.security.jwt;
 
+import com.stefanini.appointmentapp.dto.AuthenticationResponseDto;
+import com.stefanini.appointmentapp.entities.User;
+import com.stefanini.appointmentapp.entities.UserProfile;
 import com.stefanini.appointmentapp.security.userdetails.CustomUserDetails;
 import com.stefanini.appointmentapp.security.userdetails.CustomUserDetailsFactory;
+import com.stefanini.appointmentapp.service.UserProfileService;
 import com.stefanini.appointmentapp.service.UserService;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,10 +25,11 @@ public class JwtTokenProvider {
     private String secret;
     @Value("${jwt.token.expired}")
     private long validityTimeMillis;
-    private UserService userService;
 
-    public JwtTokenProvider(UserService userService) {
-        this.userService = userService;
+    private UserProfileService profileService;
+
+    public JwtTokenProvider(UserProfileService profileService) {
+        this.profileService = profileService;
     }
 
     @PostConstruct
@@ -32,7 +37,7 @@ public class JwtTokenProvider {
         secret = Base64.getEncoder().encodeToString(secret.getBytes());
     }
 
-    public String createToken(Authentication authentication) {
+    public AuthenticationResponseDto createToken(Authentication authentication) {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 
         Claims claims = Jwts.claims().setSubject(userDetails.getUsername());
@@ -41,12 +46,15 @@ public class JwtTokenProvider {
         Date currentDate = new Date();
         Date validTillDate = new Date(currentDate.getTime() + validityTimeMillis);
 
-        return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(currentDate)
-                .setExpiration(validTillDate)
-                .signWith(SignatureAlgorithm.HS256, secret)
-                .compact();
+        String token = Jwts.builder()
+                    .setClaims(claims)
+                    .setIssuedAt(currentDate)
+                    .setExpiration(validTillDate)
+                    .signWith(SignatureAlgorithm.HS256, secret)
+                    .compact();
+
+        return new AuthenticationResponseDto(userDetails.getId(),
+                userDetails.getFirstName(),userDetails.getUsername(),token);
     }
 
     public boolean validateToken(String token) {
@@ -64,10 +72,12 @@ public class JwtTokenProvider {
     }
 
     public Authentication getAuthentication(String token) {
-        String userLogin = getUserLogin(token);
-        UserDetails userDetails = CustomUserDetailsFactory.create(userService.findByLogin(userLogin));
 
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+        UserDetails userDetails = CustomUserDetailsFactory
+                .create(profileService.findByLogin(getUserLogin(token)));
+
+        return new UsernamePasswordAuthenticationToken(userDetails, "",
+                userDetails.getAuthorities());
     }
 
     public String getUserLogin(String token) {

@@ -44,6 +44,12 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentDao.findById(id);
     }
 
+//    @Loggable
+    @Override
+    public List<Appointment> findByPatientId(Long id) {
+        return appointmentDao.findByPatientId(id);
+    }
+
     @Loggable
     @Override
     public List<Appointment> findAll() {

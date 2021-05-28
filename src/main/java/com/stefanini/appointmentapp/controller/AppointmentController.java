@@ -25,6 +25,13 @@ public class AppointmentController {
         return appointmentService.findAll();
     }
 
+//    @Loggable
+    @GetMapping(value = "user/{id}")
+    List<Appointment> findByUserId(@PathVariable Long id) {
+
+        return appointmentService.findByPatientId(id);
+    }
+
     @Loggable
     @GetMapping("/{id}")
     Appointment findById(@PathVariable Long id) {
