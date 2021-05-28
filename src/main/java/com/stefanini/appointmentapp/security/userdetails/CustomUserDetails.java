@@ -8,6 +8,7 @@ import java.util.Collection;
 
 public class CustomUserDetails implements UserDetails {
     private final Long id;
+    private String firstName;
     private final String login;
 
     @JsonIgnore
@@ -15,12 +16,25 @@ public class CustomUserDetails implements UserDetails {
     private final Collection<? extends GrantedAuthority> authorities;
     private final int status;
 
-    public CustomUserDetails(Long id, String login, String password, Collection<? extends GrantedAuthority> authorities, int status) {
+    public CustomUserDetails(Long id, String firstName, String login, String password, Collection<? extends GrantedAuthority> authorities, int status) {
         this.id = id;
+        this.firstName = firstName;
         this.login = login;
         this.password = password;
         this.authorities = authorities;
         this.status = status;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     @Override

@@ -28,6 +28,7 @@ public class UserProfile {
 	private List<Speciality> specialities;
 
 
+
 	@OneToOne(cascade = CascadeType.ALL)
 	private User user;
 
@@ -78,7 +79,8 @@ public class UserProfile {
 	@JoinColumn(name = "holiday", referencedColumnName = "id")
 	private List<Holiday> holidays;
 
-	
+
+
 	/**
 	 * Gets id.
 	 * @return Long
