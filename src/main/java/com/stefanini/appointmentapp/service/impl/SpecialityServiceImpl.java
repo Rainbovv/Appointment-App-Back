@@ -3,7 +3,6 @@ package com.stefanini.appointmentapp.service.impl;
 import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dao.SpecialityDAO;
 import com.stefanini.appointmentapp.entities.Speciality;
-import com.stefanini.appointmentapp.service.DepartmentService;
 import com.stefanini.appointmentapp.service.SpecialityService;
 import org.springframework.stereotype.Service;
 import javax.persistence.NoResultException;
@@ -14,11 +13,9 @@ import java.util.List;
 @Service
 public class SpecialityServiceImpl implements SpecialityService {
     private final SpecialityDAO specialityDAO;
-    private final DepartmentService departmentService;
 
-    public SpecialityServiceImpl(SpecialityDAO specialityDAO, DepartmentService departmentService) {
+    public SpecialityServiceImpl(SpecialityDAO specialityDAO) {
         this.specialityDAO = specialityDAO;
-        this.departmentService = departmentService;
     }
 
     @Loggable
