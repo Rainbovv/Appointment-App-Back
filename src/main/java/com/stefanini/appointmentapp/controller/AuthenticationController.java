@@ -4,8 +4,6 @@ import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dto.AuthenticationRequestDto;
 import com.stefanini.appointmentapp.security.userdetails.UserDetailsServiceImpl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
@@ -24,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/api/auth")
 public class AuthenticationController {
     private UserDetailsService userDetailsService;
-    Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
 
     public AuthenticationController(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
