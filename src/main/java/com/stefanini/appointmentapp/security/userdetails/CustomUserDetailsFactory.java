@@ -1,6 +1,5 @@
 package com.stefanini.appointmentapp.security.userdetails;
 
-import com.stefanini.appointmentapp.entities.User;
 import com.stefanini.appointmentapp.entities.UserProfile;
 import com.stefanini.appointmentapp.entities.UserRole;
 import org.springframework.security.core.GrantedAuthority;

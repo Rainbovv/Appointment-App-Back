@@ -39,7 +39,6 @@ public class RegistrationController {
 		            .status(HttpStatus.CREATED)                 
 		            .body(((UserDetailsServiceImpl) userDetailsService).login(new AuthenticationRequestDto(requestDto.getLogin(), requestDto.getPassword())));
 		} catch (UnexpectedRollbackException e) {
-			System.out.println("####################" + e.getCause());
 			return ResponseEntity
 					.status(HttpStatus.FORBIDDEN)
 					.body("User with this email already exists");
