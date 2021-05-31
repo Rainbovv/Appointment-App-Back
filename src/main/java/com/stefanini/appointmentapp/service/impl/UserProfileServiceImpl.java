@@ -45,6 +45,12 @@ public class UserProfileServiceImpl implements UserProfileService {
 	}
 
 	@Loggable
+	@Override
+	public UserProfile findByLogin(String login) {
+		return profileDao.getByLogin(login);
+	}
+
+	@Loggable
 	@Transactional
 	@Override
 	public void delete(UserProfile profile) {

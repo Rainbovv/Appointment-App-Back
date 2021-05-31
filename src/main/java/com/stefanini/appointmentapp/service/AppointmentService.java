@@ -37,4 +37,12 @@ public interface AppointmentService {
      * @return a List of persisted appointments
      */
     List<Appointment> findAll();
+
+    /**
+     * Searches for persisted appointments by
+     * patient_id using AppointmentDaoImpl
+     * @param id Long
+     * @return A List of found Appointment objects
+     */
+    List<Appointment> findByPatientId(Long id);
 }
