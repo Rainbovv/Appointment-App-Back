@@ -81,14 +81,14 @@ public class UserServiceImpl implements UserService {
 
     private User mapDtoToUser(RegistrationRequestDto userDto) {
         User user = new User();
-        Long roleId = userDto.getRoleId();
+        String role = userDto.getRole();
 
-        if (Objects.isNull(roleId)) {
+        if (Objects.isNull(role)) {
             throw new IllegalArgumentException("Registration error: user role was not specified");
         }
         user.setLogin(userDto.getLogin());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setRoles(Collections.singletonList(userRoleDAO.findById(roleId)));
+        user.setRoles(Collections.singletonList(userRoleDAO.findByName(role)));
         user.setStatus(userDto.getStatus());
 
         return user;

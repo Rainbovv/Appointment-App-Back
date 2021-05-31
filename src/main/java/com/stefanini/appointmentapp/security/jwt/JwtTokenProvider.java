@@ -1,12 +1,9 @@
 package com.stefanini.appointmentapp.security.jwt;
 
 import com.stefanini.appointmentapp.dto.AuthenticationResponseDto;
-import com.stefanini.appointmentapp.entities.User;
-import com.stefanini.appointmentapp.entities.UserProfile;
 import com.stefanini.appointmentapp.security.userdetails.CustomUserDetails;
 import com.stefanini.appointmentapp.security.userdetails.CustomUserDetailsFactory;
 import com.stefanini.appointmentapp.service.UserProfileService;
-import com.stefanini.appointmentapp.service.UserService;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

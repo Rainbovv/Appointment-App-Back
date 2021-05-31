@@ -10,7 +10,7 @@ public class RegistrationRequestDto {
     private String login;
     private String password;
     private int status;
-    private Long roleId;
+    private String role;
     private String gender;
     private String firstName;
     private String lastName;
@@ -26,11 +26,11 @@ public class RegistrationRequestDto {
     private String socialNumber;
 
 
-    public RegistrationRequestDto(String login, String password, int status, Long roleId) {
+    public RegistrationRequestDto(String login, String password, int status, String role) {
         this.login = login;
         this.password = password;
         this.status = status;
-        this.roleId = roleId;
+        this.role = role;
     }
 
     public String getLogin() {
@@ -57,12 +57,12 @@ public class RegistrationRequestDto {
         this.status = status;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getGender() {
