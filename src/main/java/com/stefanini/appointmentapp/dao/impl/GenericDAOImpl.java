@@ -2,6 +2,8 @@ package com.stefanini.appointmentapp.dao.impl;
 
 import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dao.GenericDAO;
+import javassist.NotFoundException;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -18,13 +20,13 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 
     @Loggable
     @Override
-    public T create(T entity) {            
-		try {
-				entityManager.persist(entity);
-				entityManager.flush();
-			} catch (Exception e) {
-				
-			}
+    public T create(T entity) {
+        try {
+            entityManager.persist(entity);
+            entityManager.flush();
+        } catch (Exception e) {
+
+        }
         return entity;
     }
 
@@ -45,19 +47,33 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 
     @Loggable
     @Override
+    public T deleteById(Long id) throws NotFoundException {
+        T entity = findById(id);
+
+        if (entity == null) {
+            throw new NotFoundException("Delete error: entity with id = " + id + " not found and can't be deleted");
+        }
+
+        entityManager.remove(entity);
+
+        return entity;
+    }
+
+    @Loggable
+    @Override
     public T findById(Long id) {
         Query query = entityManager.createQuery(
                 "FROM " + getEntityClass().getName() + " e WHERE e.id=:id");
         query.setParameter("id", id);
 
-        return (T)query.getSingleResult();
+        return (T) query.getSingleResult();
     }
 
     @Loggable
     @Override
     public List<T> findAll() {
         Query query = entityManager.createQuery(
-                "FROM " + getEntityClass().getName() );
+                "FROM " + getEntityClass().getName());
 
         return query.getResultList();
     }
