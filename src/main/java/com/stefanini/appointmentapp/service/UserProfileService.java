@@ -16,4 +16,6 @@ public interface UserProfileService {
 	UserProfile findByLogin(String login);
 	
 	void delete(UserProfile profile);
+
+	UserProfile deleteById(Long id);
 }

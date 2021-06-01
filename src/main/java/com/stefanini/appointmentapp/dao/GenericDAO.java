@@ -1,5 +1,7 @@
 package com.stefanini.appointmentapp.dao;
 
+import javassist.NotFoundException;
+
 import java.util.List;
 
 public interface GenericDAO<T> {
@@ -23,6 +25,12 @@ public interface GenericDAO<T> {
      * @param t an entity to delete
      */
     void delete(T t);
+
+    /**
+     * Finds entity by id and deletes
+     * @param id Long-type param to find entity for deleting
+     */
+    T deleteById(Long id) throws NotFoundException;
 
     /**
      * Searches for entity by given id
