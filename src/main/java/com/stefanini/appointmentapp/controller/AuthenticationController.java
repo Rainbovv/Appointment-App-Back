@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthenticationController {
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     public AuthenticationController(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
@@ -30,15 +30,15 @@ public class AuthenticationController {
     @Loggable
     @PostMapping("/sign-in")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequestDto requestDto) {
-		try {
-			return ResponseEntity
-		            .status(HttpStatus.CREATED)                 
-		            .body(((UserDetailsServiceImpl)userDetailsService).login(requestDto));
-		} catch (AuthenticationException e) {
-			return ResponseEntity
-					.status(HttpStatus.FORBIDDEN)
-					.body("Invalid username or password");
-		}
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(((UserDetailsServiceImpl) userDetailsService).login(requestDto));
+        } catch (AuthenticationException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("Invalid username or password");
+        }
     }
 
     @Loggable
