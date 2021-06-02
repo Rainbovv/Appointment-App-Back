@@ -41,13 +41,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .httpBasic().disable()
-                .cors().and()
-                .authorizeRequests().antMatchers("/api/auth/sign-in", "/api/auth/sign-up").permitAll()
+                .authorizeRequests().antMatchers("/api/auth/sign-in",
+                "/api/auth/sign-up").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .and()
                 .csrf().disable().exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.cors();
 
         http.addFilterBefore(getJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

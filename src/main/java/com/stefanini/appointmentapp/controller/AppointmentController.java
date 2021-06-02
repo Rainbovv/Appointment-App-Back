@@ -3,16 +3,19 @@ package com.stefanini.appointmentapp.controller;
 import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.entities.Appointment;
 import com.stefanini.appointmentapp.service.AppointmentService;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/appointments")
 public class AppointmentController {
 
-    private final AppointmentService appointmentService;
+    AppointmentService appointmentService;
 
     public AppointmentController(AppointmentService appointmentService) {
         this.appointmentService = appointmentService;
@@ -20,15 +23,14 @@ public class AppointmentController {
 
     @Loggable
     @GetMapping("")
-    Set<Appointment> findAll() {
+    List<Appointment> findAll() {
 
         return appointmentService.findAll();
     }
 
-//    @Loggable
+    @Loggable
     @GetMapping(value = "user/{id}")
     List<Appointment> findByUserId(@PathVariable Long id) {
-
         return appointmentService.findByPatientId(id);
     }
 
