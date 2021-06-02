@@ -3,11 +3,11 @@ package com.stefanini.appointmentapp.dao.impl;
 import com.stefanini.appointmentapp.dao.AppointmentDao;
 import com.stefanini.appointmentapp.dto.UserAppointmentDTO;
 import com.stefanini.appointmentapp.entities.Appointment;
+import com.stefanini.appointmentapp.entities.User;
 import com.stefanini.appointmentapp.entities.UserProfile;
 import org.springframework.stereotype.Repository;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+
+import javax.persistence.criteria.*;
 import java.util.List;
 
 @Repository
@@ -30,9 +30,10 @@ public class AppointmentDaoImpl extends GenericDAOImpl<Appointment> implements A
         Root<Appointment> appointmentRoot = criteria.from(getEntityClass());
         Root<UserProfile> profileRoot = criteria.from(UserProfile.class);
 
-        criteria.where(builder.equal(appointmentRoot.get(userRole).get("id"), id));
-        criteria.where(builder.equal(profileRoot.get("user").get("id"),
-                appointmentRoot.get(profileRole).get("id")));
+        criteria.where(builder.and(builder.equal(appointmentRoot.get(userRole).get("id"), id),
+                builder.equal(profileRoot.get("user").get("id"),
+                        appointmentRoot.get(profileRole).get("id"))));
+
 
         criteria.multiselect(appointmentRoot.get("id"),
                 appointmentRoot.get("startTime"),
