@@ -14,13 +14,6 @@ public interface UserService {
     User create(User user);
 
     /**
-     * Persist an User using UserDaoImpl
-     * @param dto an entity of RegistrationRequestDto
-     * @return persisted user
-     */
-    User create(RegistrationRequestDto dto);
-
-    /**
      * Updates User using UserDaoImpl
      * @param user to update
      * @return updated user
