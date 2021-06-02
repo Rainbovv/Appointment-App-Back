@@ -15,8 +15,6 @@ public final class CustomUserDetailsFactory {
 
     public static CustomUserDetails create(UserProfile profile) {
 
-
-
         return new CustomUserDetails(
                 profile.getUser().getId(),
                 profile.getFirstName(),
