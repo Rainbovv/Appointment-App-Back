@@ -1,5 +1,6 @@
 package com.stefanini.appointmentapp.dao;
 
+import com.stefanini.appointmentapp.dto.UserAppointmentDTO;
 import com.stefanini.appointmentapp.entities.Appointment;
 
 import java.util.List;
@@ -7,9 +8,10 @@ import java.util.List;
 public interface AppointmentDao extends GenericDAO<Appointment> {
 
     /**
-     * Searches for persisted appointments by patient_id
+     * Searches for persisted appointments by doctor_id or patient_id
      * @param id Long
-     * @return A List of found Appointment objects
+     * @param userRole String
+     * @return A List of UserAppointmentDTO
      */
-    List<Appointment> findByPatientId(Long id);
+    List<UserAppointmentDTO> findByUserId(Long id, String userRole);
 }
