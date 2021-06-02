@@ -12,7 +12,7 @@ import java.util.Set;
 @RequestMapping("api/appointments")
 public class AppointmentController {
 
-    AppointmentService appointmentService;
+    private final AppointmentService appointmentService;
 
     public AppointmentController(AppointmentService appointmentService) {
         this.appointmentService = appointmentService;

@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("api/dailySchedules")
 public class DailyScheduleController {
 
-    DailyScheduleService dailyScheduleService;
+    private final DailyScheduleService dailyScheduleService;
 
     /**
      * Constructs and initiates DailyScheduleController object with instance of DailyScheduleService.

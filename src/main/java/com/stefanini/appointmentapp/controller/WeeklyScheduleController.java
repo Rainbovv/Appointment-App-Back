@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("api/weeklySchedules")
 public class WeeklyScheduleController {
 
-    WeeklyScheduleService weeklyScheduleService;
+    private final WeeklyScheduleService weeklyScheduleService;
 
     /**
      * Constructs and initiates WeeklyScheduleController object with instance of WeeklyScheduleService.

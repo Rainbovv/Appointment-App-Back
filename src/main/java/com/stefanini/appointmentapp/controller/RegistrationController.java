@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class RegistrationController {
-    private UserDetailsService userDetailsService;
-    private UserService userService;
+    private final UserDetailsService userDetailsService;
+    private final UserService userService;
     
     
 
