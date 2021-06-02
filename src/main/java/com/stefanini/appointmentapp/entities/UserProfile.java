@@ -9,6 +9,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 /**
  * Profile is an entity that represents personal and public information about a users.
  * @author cvigulea
@@ -80,6 +83,7 @@ public class UserProfile {
 	private String gender;
 	
 	@OneToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinColumn(name = "holiday", referencedColumnName = "id")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Holiday> holidays;
