@@ -1,5 +1,8 @@
 package com.stefanini.appointmentapp.entities;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.*;
@@ -20,7 +23,8 @@ public class UserProfile {
 	@Column(name = "id")
 	private Long id;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(
 			name = "doctors_speciality", 
 			joinColumns = { @JoinColumn(name = "doctor_id") }, 
@@ -77,6 +81,7 @@ public class UserProfile {
 	
 	@OneToMany
 	@JoinColumn(name = "holiday", referencedColumnName = "id")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Holiday> holidays;
 
 
