@@ -1,17 +1,17 @@
 package com.stefanini.appointmentapp.dao.impl;
 
-import com.stefanini.appointmentapp.annotation.Loggable;
+import com.stefanini.appointmentapp.dao.UserProfileDAO;
 import com.stefanini.appointmentapp.dto.UserProfileDto;
 import com.stefanini.appointmentapp.entities.User;
-import org.hibernate.type.LongType;
-import org.springframework.stereotype.Repository;
-import com.stefanini.appointmentapp.dao.UserProfileDAO;
 import com.stefanini.appointmentapp.entities.UserProfile;
+import com.stefanini.appointmentapp.entities.UserRole;
+import com.stefanini.appointmentapp.entities.enums.RoleName;
+import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.*;
-import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Iterator;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Repository
@@ -22,7 +22,6 @@ public class UserProfileDAOImpl extends GenericDAOImpl<UserProfile> implements U
         return UserProfile.class;
     }
 
-    @Loggable
     @Override
     public UserProfile getByLogin(String login) {
 
@@ -39,59 +38,59 @@ public class UserProfileDAOImpl extends GenericDAOImpl<UserProfile> implements U
 
     @Override
     public List<UserProfileDto> getPersonalProfiles() {
-        Iterator it = entityManager.createNativeQuery("select u.id as profile_id, ur.user_id as user_id,  first_name, last_name, email, telephone, r.id as role_id, r.name as roleName  from user u\n" +
-                "join user_roles ur on u.id = ur.user_id\n" +
-                "join profile p on u.id = p.user_id\n" +
-                "join role r on ur.role_id = r.id\n" +
-                "where role_id != 2;")
-                .getResultList()
-                .iterator();
 
-        List<UserProfileDto> profiles = new ArrayList<>();
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<UserProfileDto> criteria = builder
+                .createQuery(UserProfileDto.class);
 
-        while (it.hasNext()) {
-            Object[] tuple = (Object[]) it.next();
-            UserProfileDto dto = new UserProfileDto();
+        Root<User> userRoot = criteria.from(User.class);
+        Root<UserProfile> profileRoot = criteria.from(getEntityClass());
+        Join<User, UserRole> join = userRoot.join("roles");
 
-            dto.setId(Long.parseLong(String.valueOf(tuple[0])));
-            dto.setFirstName((String) tuple[1]);
-            dto.setLastName((String) tuple[2]);
-            dto.setEmail((String) tuple[3]);
-            dto.setTelephone((String) tuple[4]);
-            dto.setRoleId(Long.parseLong(String.valueOf(tuple[5])));
-            dto.setRoleName((String) tuple[6]);
+        criteria.where(builder.and(builder.notEqual(join.get("name"), RoleName.valueOf("PATIENT")),
+                builder.equal(profileRoot.get("user").get("id"),
+                        userRoot.get("id"))));
 
-            profiles.add(dto);
-        }
+        criteria.multiselect(
+                userRoot.get("id"),
+                profileRoot.get("id"),
+                profileRoot.get("firstName"),
+                profileRoot.get("lastName"),
+                profileRoot.get("email"),
+                profileRoot.get("telephone"),
+                join.get("id"),
+                join.get("name")
+        );
 
-        return profiles;
+        return entityManager.createQuery(criteria).getResultList();
     }
 
     @Override
     public List<UserProfileDto> getPatientsProfiles() {
-        Iterator it = entityManager.createNativeQuery("select u.id as profile_id, ur.user_id as user_id,  first_name, last_name, email, telephone, r.id as role_id, r.name as roleName  from user u\n" +
-                "join user_roles ur on u.id = ur.user_id\n" +
-                "join profile p on u.id = p.user_id\n" +
-                "join role r on ur.role_id = r.id\n" +
-                "where role_id = 2;").getResultList().iterator();
 
-        List<UserProfileDto> profiles = new ArrayList<>();
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<UserProfileDto> criteria = builder
+                .createQuery(UserProfileDto.class);
 
-        while (it.hasNext()) {
-            Object[] tuple = (Object[]) it.next();
-            UserProfileDto dto = new UserProfileDto();
+        Root<User> userRoot = criteria.from(User.class);
+        Root<UserProfile> profileRoot = criteria.from(getEntityClass());
+        Join<User, UserRole> join = userRoot.join("roles");
 
-            dto.setId(Long.parseLong(String.valueOf(tuple[0])));
-            dto.setFirstName((String) tuple[1]);
-            dto.setLastName((String) tuple[2]);
-            dto.setEmail((String) tuple[3]);
-            dto.setTelephone((String) tuple[4]);
-            dto.setRoleId(Long.parseLong(String.valueOf(tuple[5])));
-            dto.setRoleName((String) tuple[6]);
+        criteria.where(builder.and(builder.equal(join.get("name"), RoleName.valueOf("PATIENT")),
+                builder.equal(profileRoot.get("user").get("id"),
+                        userRoot.get("id"))));
 
-            profiles.add(dto);
-        }
+        criteria.multiselect(
+                userRoot.get("id"),
+                profileRoot.get("id"),
+                profileRoot.get("firstName"),
+                profileRoot.get("lastName"),
+                profileRoot.get("email"),
+                profileRoot.get("telephone"),
+                join.get("id"),
+                join.get("name")
+        );
 
-        return profiles;
+        return entityManager.createQuery(criteria).getResultList();
     }
 }
