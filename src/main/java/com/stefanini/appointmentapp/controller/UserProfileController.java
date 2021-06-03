@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dto.Response;
+import com.stefanini.appointmentapp.dto.UserProfileDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,6 +40,18 @@ public class UserProfileController {
     @GetMapping("/{id}")
     public UserProfile getProfileById(@PathVariable Long id) {
         return profileService.findById(id);
+    }
+
+    @Loggable
+    @GetMapping("/patients")
+    public List<UserProfileDto> getPatientsProfiles() {
+        return profileService.getPatientsProfiles();
+    }
+
+    @Loggable
+    @GetMapping("/personal")
+    public List<UserProfileDto> getPersonalProfiles() {
+        return profileService.getPersonalProfiles();
     }
 
     @Loggable

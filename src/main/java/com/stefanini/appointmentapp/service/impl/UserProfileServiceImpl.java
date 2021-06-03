@@ -1,18 +1,14 @@
 package com.stefanini.appointmentapp.service.impl;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import javax.transaction.Transactional;
 
 import com.stefanini.appointmentapp.annotation.Loggable;
-import com.stefanini.appointmentapp.dao.UserRoleDAO;
-import com.stefanini.appointmentapp.dto.RegistrationRequestDto;
-import com.stefanini.appointmentapp.entities.User;
+import com.stefanini.appointmentapp.dto.UserProfileDto;
 import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.stefanini.appointmentapp.dao.UserProfileDAO;
 import com.stefanini.appointmentapp.entities.UserProfile;
@@ -20,13 +16,12 @@ import com.stefanini.appointmentapp.service.UserProfileService;
 
 @Service
 public class UserProfileServiceImpl implements UserProfileService {
+    private Logger logger = LoggerFactory.getLogger(UserProfileServiceImpl.class);
     private final UserProfileDAO profileDao;
     private final UserRoleDAO roleDAO;
     private final PasswordEncoder passwordEncoder;
 
-    private static final Logger logger = LoggerFactory.getLogger(UserProfileServiceImpl.class);
-
-    public UserProfileServiceImpl(UserProfileDAO profileDao, UserRoleDAO roleDAO, PasswordEncoder passwordEncoder) {
+    public UserProfileServiceImpl(UserProfileDAO profileDao) {
         this.profileDao = profileDao;
         this.roleDAO = roleDAO;
         this.passwordEncoder = passwordEncoder;
@@ -69,6 +64,8 @@ public class UserProfileServiceImpl implements UserProfileService {
         return profileDao.findById(id);
     }
 
+
+
     @Loggable
     @Override
     public UserProfile findByLogin(String login) {
@@ -96,6 +93,18 @@ public class UserProfileServiceImpl implements UserProfileService {
         }
 
         return profile;
+    }
+
+    @Loggable
+    @Override
+    public List<UserProfileDto> getPersonalProfiles() {
+        return profileDao.getPersonalProfiles();
+    }
+
+    @Loggable
+    @Override
+    public List<UserProfileDto> getPatientsProfiles() {
+        return profileDao.getPatientsProfiles();
     }
 
     private User mapDtoToUser(RegistrationRequestDto userDto) {

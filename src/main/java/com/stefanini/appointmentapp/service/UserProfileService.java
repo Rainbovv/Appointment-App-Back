@@ -2,7 +2,7 @@ package com.stefanini.appointmentapp.service;
 
 import java.util.List;
 
-import com.stefanini.appointmentapp.dto.RegistrationRequestDto;
+import com.stefanini.appointmentapp.dto.UserProfileDto;
 import com.stefanini.appointmentapp.entities.UserProfile;
 
 public interface UserProfileService {
@@ -21,4 +21,8 @@ public interface UserProfileService {
 	UserProfile create(RegistrationRequestDto dto);
 
 	UserProfile deleteById(Long id);
+
+	List<UserProfileDto> getPersonalProfiles();
+
+	List<UserProfileDto> getPatientsProfiles();
 }
