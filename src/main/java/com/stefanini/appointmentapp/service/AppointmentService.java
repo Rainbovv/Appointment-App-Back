@@ -1,5 +1,6 @@
 package com.stefanini.appointmentapp.service;
 
+import com.stefanini.appointmentapp.dto.UserAppointmentDTO;
 import com.stefanini.appointmentapp.entities.Appointment;
 import java.util.List;
 
@@ -42,7 +43,15 @@ public interface AppointmentService {
      * Searches for persisted appointments by
      * patient_id using AppointmentDaoImpl
      * @param id Long
-     * @return A List of found Appointment objects
+     * @return A List of UserAppointmentDTO
      */
-    List<Appointment> findByPatientId(Long id);
+    List<UserAppointmentDTO> findByPatientId(Long id);
+
+    /**
+     * Searches for persisted appointments by
+     * doctor_id using AppointmentDaoImpl
+     * @param id Long
+     * @return A List of UserAppointmentDTO
+     */
+    List<UserAppointmentDTO> findByDoctorId(Long id);
 }

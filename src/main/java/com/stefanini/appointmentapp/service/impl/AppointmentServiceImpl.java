@@ -2,6 +2,7 @@ package com.stefanini.appointmentapp.service.impl;
 
 import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dao.AppointmentDao;
+import com.stefanini.appointmentapp.dto.UserAppointmentDTO;
 import com.stefanini.appointmentapp.entities.Appointment;
 import com.stefanini.appointmentapp.service.AppointmentService;
 import org.springframework.stereotype.Service;
@@ -44,10 +45,17 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentDao.findById(id);
     }
 
-//    @Loggable
+    @Loggable
     @Override
-    public List<Appointment> findByPatientId(Long id) {
-        return appointmentDao.findByPatientId(id);
+    public List<UserAppointmentDTO> findByPatientId(Long id) {
+
+        return appointmentDao.findByUserId(id, "patient");
+    }
+
+    @Override
+    public List<UserAppointmentDTO> findByDoctorId(Long id) {
+
+        return appointmentDao.findByUserId(id, "doctor");
     }
 
     @Loggable
