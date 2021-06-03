@@ -21,12 +21,10 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
     @Loggable
     @Override
     public T create(T entity) {
-        try {
-            entityManager.persist(entity);
-            entityManager.flush();
-        } catch (Exception e) {
 
-        }
+        entityManager.persist(entity);
+        entityManager.flush();
+
         return entity;
     }
 
@@ -53,7 +51,6 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
         if (entity == null) {
             throw new NotFoundException("Delete error: entity with id = " + id + " not found and can't be deleted");
         }
-
         entityManager.remove(entity);
 
         return entity;

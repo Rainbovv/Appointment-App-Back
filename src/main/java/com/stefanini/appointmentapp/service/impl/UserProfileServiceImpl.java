@@ -42,6 +42,10 @@ public class UserProfileServiceImpl implements UserProfileService {
     @Transactional
     @Override
     public UserProfile update(UserProfile profile) {
+
+        profile.getUser().setPassword(profileDao
+                .findById(profile.getId()).getUser().getPassword());
+
         return profileDao.update(profile);
     }
 
