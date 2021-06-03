@@ -5,6 +5,7 @@ import java.util.List;
 import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dto.Response;
 import com.stefanini.appointmentapp.dto.UserProfileDto;
+import javassist.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -74,7 +75,7 @@ public class UserProfileController {
 
     @Loggable
     @DeleteMapping("/{id}")
-    public ResponseEntity<Response> deleteProfileById(@PathVariable Long id) {
+    public ResponseEntity<Response> deleteProfileById(@PathVariable Long id) throws NotFoundException {
         profileService.deleteById(id);
 
         return ResponseEntity.ok(new Response(HttpStatus.OK, "User profile with id = " + id + " was deleted"));

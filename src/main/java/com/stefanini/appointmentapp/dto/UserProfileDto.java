@@ -1,18 +1,26 @@
 package com.stefanini.appointmentapp.dto;
 
+import com.stefanini.appointmentapp.entities.UserRole;
+import com.stefanini.appointmentapp.entities.enums.RoleName;
+
 public class UserProfileDto {
-    Long id;
+    Long userId;
+    Long profileId;
     String firstName;
     String lastName;
     String email;
     String telephone;
     Long roleId;
-    String roleName;
+    RoleName roleName;
 
     public UserProfileDto() {}
 
-    public UserProfileDto(Long id, String firstName, String lastName, String email, String telephone, Long roleId, String roleName) {
-        this.id = id;
+    public UserProfileDto(Long userId, Long profileId,
+                          String firstName, String lastName,
+                          String email, String telephone,
+                          Long roleId, RoleName roleName) {
+        this.userId = userId;
+        this.profileId = profileId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -21,12 +29,20 @@ public class UserProfileDto {
         this.roleName = roleName;
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getProfileId() {
+        return profileId;
+    }
+
+    public void setProfileId(Long profileId) {
+        this.profileId = profileId;
     }
 
     public String getFirstName() {
@@ -69,11 +85,25 @@ public class UserProfileDto {
         this.roleId = roleId;
     }
 
-    public String getRoleName() {
+    public RoleName getRoleName() {
         return roleName;
     }
 
-    public void setRoleName(String roleName) {
+    public void setRoleName(RoleName roleName) {
         this.roleName = roleName;
+    }
+
+    @Override
+    public String toString() {
+        return "UserProfileDto{" +
+                "userId=" + userId +
+                ", profileId=" + profileId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", roleId=" + roleId +
+                ", roleName='" + roleName + '\'' +
+                '}';
     }
 }
