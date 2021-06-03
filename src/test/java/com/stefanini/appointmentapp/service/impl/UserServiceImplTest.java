@@ -1,9 +1,8 @@
 package com.stefanini.appointmentapp.service.impl;
 
 import com.stefanini.appointmentapp.dao.UserDao;
-import com.stefanini.appointmentapp.dao.UserProfileDAO;
 import com.stefanini.appointmentapp.entities.User;
-import com.stefanini.appointmentapp.entities.UserProfile;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,12 +26,11 @@ class UserServiceImplTest {
     @InjectMocks
     UserServiceImpl userService;
 
-    User user1;
-    User user2;
-    UserProfile profile1;
+    static User user1;
+    static User user2;
 
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         user1 = new User();
         user1.setLogin("login1");
         user1.setPassword("password1");
@@ -42,9 +40,6 @@ class UserServiceImplTest {
         user2.setLogin("login2");
         user2.setPassword("password2");
         user2.setId(2L);
-
-        profile1 = new UserProfile();
-
     }
 
     @Test
@@ -59,5 +54,10 @@ class UserServiceImplTest {
 
         assertNotNull(foundUsers);
         assertEquals(2, foundUsers.size());
+    }
+
+    @Test
+    void findById() {
+
     }
 }
