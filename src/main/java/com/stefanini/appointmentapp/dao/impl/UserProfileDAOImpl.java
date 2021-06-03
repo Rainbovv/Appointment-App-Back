@@ -8,10 +8,7 @@ import com.stefanini.appointmentapp.entities.UserRole;
 import com.stefanini.appointmentapp.entities.enums.RoleName;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.List;
 
 @Repository
@@ -37,7 +34,7 @@ public class UserProfileDAOImpl extends GenericDAOImpl<UserProfile> implements U
     }
 
     @Override
-    public List<UserProfileDto> getPersonalProfiles() {
+    public List<UserProfileDto> getProfilesByRole(String profileRole) {
 
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<UserProfileDto> criteria = builder
@@ -47,7 +44,17 @@ public class UserProfileDAOImpl extends GenericDAOImpl<UserProfile> implements U
         Root<UserProfile> profileRoot = criteria.from(getEntityClass());
         Join<User, UserRole> join = userRoot.join("roles");
 
-        criteria.where(builder.and(builder.notEqual(join.get("name"), RoleName.valueOf("PATIENT")),
+        Expression<Boolean> expression = null;
+
+        switch (profileRole) {
+            case "PATIENT":
+                expression = builder.equal(join.get("name"), RoleName.valueOf("PATIENT"));
+                break;
+            case "PERSONAL":
+                expression = builder.notEqual(join.get("name"), RoleName.valueOf("PATIENT"));
+        }
+        criteria.where(builder.and(
+                expression,
                 builder.equal(profileRoot.get("user").get("id"),
                         userRoot.get("id"))));
 
@@ -61,36 +68,6 @@ public class UserProfileDAOImpl extends GenericDAOImpl<UserProfile> implements U
                 join.get("id"),
                 join.get("name")
         );
-
-        return entityManager.createQuery(criteria).getResultList();
-    }
-
-    @Override
-    public List<UserProfileDto> getPatientsProfiles() {
-
-        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<UserProfileDto> criteria = builder
-                .createQuery(UserProfileDto.class);
-
-        Root<User> userRoot = criteria.from(User.class);
-        Root<UserProfile> profileRoot = criteria.from(getEntityClass());
-        Join<User, UserRole> join = userRoot.join("roles");
-
-        criteria.where(builder.and(builder.equal(join.get("name"), RoleName.valueOf("PATIENT")),
-                builder.equal(profileRoot.get("user").get("id"),
-                        userRoot.get("id"))));
-
-        criteria.multiselect(
-                userRoot.get("id"),
-                profileRoot.get("id"),
-                profileRoot.get("firstName"),
-                profileRoot.get("lastName"),
-                profileRoot.get("email"),
-                profileRoot.get("telephone"),
-                join.get("id"),
-                join.get("name")
-        );
-
         return entityManager.createQuery(criteria).getResultList();
     }
 }
