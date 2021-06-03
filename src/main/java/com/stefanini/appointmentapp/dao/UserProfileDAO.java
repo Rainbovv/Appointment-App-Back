@@ -12,9 +12,7 @@ public interface UserProfileDAO extends GenericDAO<UserProfile> {
      * @param login of type String
      * @return entity of type UserProfile
      */
-    public UserProfile getByLogin(String login);
+    UserProfile getByLogin(String login);
 
-    List<UserProfileDto> getPersonalProfiles();
-
-    List<UserProfileDto> getPatientsProfiles();
+    List<UserProfileDto> getProfilesByRole(String profileRole);
 }

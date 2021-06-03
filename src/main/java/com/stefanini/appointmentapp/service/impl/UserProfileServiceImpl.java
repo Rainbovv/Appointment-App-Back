@@ -1,24 +1,21 @@
 package com.stefanini.appointmentapp.service.impl;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import javax.transaction.Transactional;
-
 import com.stefanini.appointmentapp.annotation.Loggable;
+import com.stefanini.appointmentapp.dao.UserProfileDAO;
 import com.stefanini.appointmentapp.dao.UserRoleDAO;
 import com.stefanini.appointmentapp.dto.RegistrationRequestDto;
 import com.stefanini.appointmentapp.dto.UserProfileDto;
 import com.stefanini.appointmentapp.entities.User;
-import javassist.NotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import com.stefanini.appointmentapp.dao.UserProfileDAO;
 import com.stefanini.appointmentapp.entities.UserProfile;
 import com.stefanini.appointmentapp.service.UserProfileService;
+import javassist.NotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserProfileServiceImpl implements UserProfileService {
@@ -81,12 +78,12 @@ public class UserProfileServiceImpl implements UserProfileService {
     @Loggable
     @Override
     public List<UserProfileDto> getPersonalProfiles() {
-        return profileDao.getPersonalProfiles();
+        return profileDao.getProfilesByRole("PERSONAL");
     }
 
     @Loggable
     @Override
     public List<UserProfileDto> getPatientsProfiles() {
-        return profileDao.getPatientsProfiles();
+        return profileDao.getProfilesByRole("PATIENT");
     }
 }
