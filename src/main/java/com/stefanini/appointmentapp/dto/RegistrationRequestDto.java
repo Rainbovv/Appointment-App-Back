@@ -3,7 +3,7 @@ package com.stefanini.appointmentapp.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 
 public class RegistrationRequestDto {
@@ -19,8 +19,8 @@ public class RegistrationRequestDto {
     private String telephone;
     private int office;
 
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime dateOfBirth;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate dateOfBirth;
 
     private String address;
     private String socialNumber;
@@ -121,11 +121,11 @@ public class RegistrationRequestDto {
         this.office = office;
     }
 
-    public LocalDateTime getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

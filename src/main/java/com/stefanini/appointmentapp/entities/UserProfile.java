@@ -3,14 +3,11 @@ package com.stefanini.appointmentapp.entities;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import java.time.LocalDateTime;
-import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Profile is an entity that represents personal and public information about a users.
@@ -71,7 +68,7 @@ public class UserProfile {
 	private WeeklySchedule schedule;
 
 	@Column(name = "date_of_birth")
-	private LocalDateTime dateOfBirth;
+	private LocalDate dateOfBirth;
 	
 	@Column(name = "address")
 	private String address;
@@ -274,7 +271,7 @@ public class UserProfile {
 	 * @return Date
 	 */
 
-	public LocalDateTime getDateOfBirth() {
+	public LocalDate getDateOfBirth() {
 		return dateOfBirth;
 	}
 	
@@ -283,7 +280,7 @@ public class UserProfile {
 	 * @param dateOfBirth Date
 	 */
 
-	public void setDateOfBirth(LocalDateTime dateOfBirth) {
+	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	

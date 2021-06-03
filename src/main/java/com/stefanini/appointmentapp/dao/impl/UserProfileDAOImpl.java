@@ -1,5 +1,6 @@
 package com.stefanini.appointmentapp.dao.impl;
 
+import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dao.UserProfileDAO;
 import com.stefanini.appointmentapp.dto.UserProfileDto;
 import com.stefanini.appointmentapp.entities.User;
@@ -14,11 +15,13 @@ import java.util.List;
 @Repository
 public class UserProfileDAOImpl extends GenericDAOImpl<UserProfile> implements UserProfileDAO {
 
+    @Loggable
     @Override
     protected Class<UserProfile> getEntityClass() {
         return UserProfile.class;
     }
 
+    @Loggable
     @Override
     public UserProfile getByLogin(String login) {
 
@@ -33,6 +36,7 @@ public class UserProfileDAOImpl extends GenericDAOImpl<UserProfile> implements U
         return entityManager.createQuery(criteria).getSingleResult();
     }
 
+    @Loggable
     @Override
     public List<UserProfileDto> getProfilesByRole(String profileRole) {
 
