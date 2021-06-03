@@ -4,6 +4,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import com.stefanini.appointmentapp.annotation.Loggable;
+import com.stefanini.appointmentapp.dto.UserProfileDto;
 import javassist.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +49,8 @@ public class UserProfileServiceImpl implements UserProfileService {
         return profileDao.findById(id);
     }
 
+
+
     @Loggable
     @Override
     public UserProfile findByLogin(String login) {
@@ -75,5 +78,17 @@ public class UserProfileServiceImpl implements UserProfileService {
         }
 
         return profile;
+    }
+
+    @Loggable
+    @Override
+    public List<UserProfileDto> getPersonalProfiles() {
+        return profileDao.getPersonalProfiles();
+    }
+
+    @Loggable
+    @Override
+    public List<UserProfileDto> getPatientsProfiles() {
+        return profileDao.getPatientsProfiles();
     }
 }

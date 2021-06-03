@@ -1,6 +1,9 @@
 package com.stefanini.appointmentapp.dao;
 
+import com.stefanini.appointmentapp.dto.UserProfileDto;
 import com.stefanini.appointmentapp.entities.UserProfile;
+
+import java.util.List;
 
 public interface UserProfileDAO extends GenericDAO<UserProfile> {
 
@@ -10,4 +13,8 @@ public interface UserProfileDAO extends GenericDAO<UserProfile> {
      * @return entity of type UserProfile
      */
     public UserProfile getByLogin(String login);
+
+    List<UserProfileDto> getPersonalProfiles();
+
+    List<UserProfileDto> getPatientsProfiles();
 }
