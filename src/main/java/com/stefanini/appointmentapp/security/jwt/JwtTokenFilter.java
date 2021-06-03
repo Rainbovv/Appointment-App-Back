@@ -1,5 +1,9 @@
 package com.stefanini.appointmentapp.security.jwt;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -12,7 +16,7 @@ import java.io.IOException;
 
 
 public class JwtTokenFilter extends OncePerRequestFilter {
-    private JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider;
 
     public JwtTokenFilter(JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
@@ -20,18 +24,20 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        String token = httpServletRequest.getHeader("Authorization");
+        try {
+            String token = httpServletRequest.getHeader("Authorization");
 
-        System.err.println(token);
-
-        if (token != null && jwtTokenProvider.validateToken(token)) {
-            Authentication authentication = jwtTokenProvider.getAuthentication(token);
-
-            if (authentication != null) {
-                SecurityContextHolder.getContext().setAuthentication(authentication);
+            System.err.println(token);
+            if (token != null && jwtTokenProvider.validateToken(token)) {
+                Authentication authentication = jwtTokenProvider.getAuthentication(token);
+                if (authentication != null) {
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
             }
+        } catch(ExpiredJwtException | BadCredentialsException ex)
+        {
+            httpServletRequest.setAttribute("exception", ex);
         }
-
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 }

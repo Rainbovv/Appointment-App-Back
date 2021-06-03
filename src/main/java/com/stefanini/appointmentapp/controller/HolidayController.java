@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("api/holidays")
 public class HolidayController {
 
-    HolidayService holidayService;
+    private final HolidayService holidayService;
 
     /**
      * Constructs and initiates HolidayController object with instance of HolidayService.

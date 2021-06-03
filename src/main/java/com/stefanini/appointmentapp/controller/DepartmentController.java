@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class DepartmentController {
-    final DepartmentService departmentService;
+    private final DepartmentService departmentService;
 
     public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;

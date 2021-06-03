@@ -4,6 +4,7 @@ import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dto.AuthenticationRequestDto;
 import com.stefanini.appointmentapp.dto.RegistrationRequestDto;
 import com.stefanini.appointmentapp.security.userdetails.UserDetailsServiceImpl;
+import com.stefanini.appointmentapp.service.UserProfileService;
 import com.stefanini.appointmentapp.service.UserService;
 
 import org.springframework.http.HttpStatus;
@@ -20,21 +21,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class RegistrationController {
-    private UserDetailsService userDetailsService;
-    private UserService userService;
-    
-    
+    private final UserDetailsService userDetailsService;
+    private final UserProfileService profileService;
 
-    public RegistrationController(UserService userService, UserDetailsService userDetailsService) {
-        this.userService = userService;
+    public RegistrationController(UserDetailsService userDetailsService, UserProfileService profileService) {
         this.userDetailsService = userDetailsService;
+        this.profileService = profileService;
     }
 
     @Loggable
     @PostMapping(value = "/auth/sign-up", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@RequestBody RegistrationRequestDto requestDto) {    	
     	try {
-    		userService.create(requestDto);
+            profileService.create(requestDto);
 			return ResponseEntity
 		            .status(HttpStatus.CREATED)                 
 		            .body(((UserDetailsServiceImpl) userDetailsService).login(new AuthenticationRequestDto(requestDto.getLogin(), requestDto.getPassword())));
