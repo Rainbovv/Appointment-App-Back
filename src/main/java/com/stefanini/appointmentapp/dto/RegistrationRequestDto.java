@@ -18,6 +18,7 @@ public class RegistrationRequestDto {
     private String degree;
     private String telephone;
     private int office;
+    private String creator;
 
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate dateOfBirth;
@@ -143,5 +144,13 @@ public class RegistrationRequestDto {
 
     public void setSocialNumber(String socialNumber) {
         this.socialNumber = socialNumber;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }
