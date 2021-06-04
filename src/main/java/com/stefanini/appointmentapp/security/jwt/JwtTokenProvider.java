@@ -37,22 +37,23 @@ public class JwtTokenProvider {
 
     public AuthenticationResponseDto createToken(Authentication authentication) {
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        List<String> roles = getRoleNames(userDetails.getAuthorities());
 
         Claims claims = Jwts.claims().setSubject(userDetails.getUsername());
-        claims.put("roles", getRoleNames(userDetails.getAuthorities()));
+        claims.put("roles", roles);
 
         Date currentDate = new Date();
         Date validTillDate = new Date(currentDate.getTime() + validityTimeMillis);
 
         String token = Jwts.builder()
-                    .setClaims(claims)
-                    .setIssuedAt(currentDate)
-                    .setExpiration(validTillDate)
-                    .signWith(SignatureAlgorithm.HS256, secret)
-                    .compact();
+                .setClaims(claims)
+                .setIssuedAt(currentDate)
+                .setExpiration(validTillDate)
+                .signWith(SignatureAlgorithm.HS256, secret)
+                .compact();
 
         return new AuthenticationResponseDto(userDetails.getId(),
-                userDetails.getFirstName(),userDetails.getUsername(),token);
+                userDetails.getFirstName(), userDetails.getUsername(), token, roles);
     }
 
     public boolean validateToken(String token) {
