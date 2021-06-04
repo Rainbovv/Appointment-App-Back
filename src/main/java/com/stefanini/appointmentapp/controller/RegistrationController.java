@@ -3,6 +3,8 @@ package com.stefanini.appointmentapp.controller;
 import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dto.AuthenticationRequestDto;
 import com.stefanini.appointmentapp.dto.RegistrationRequestDto;
+import com.stefanini.appointmentapp.dto.Response;
+import com.stefanini.appointmentapp.entities.enums.RoleName;
 import com.stefanini.appointmentapp.security.userdetails.UserDetailsServiceImpl;
 import com.stefanini.appointmentapp.service.UserProfileService;
 import com.stefanini.appointmentapp.service.UserService;
@@ -34,6 +36,13 @@ public class RegistrationController {
     public ResponseEntity<?> create(@RequestBody RegistrationRequestDto requestDto) {    	
     	try {
             profileService.create(requestDto);
+
+            if (requestDto.getCreator().equals(RoleName.ADMIN.name())) {
+                return ResponseEntity
+                        .status(HttpStatus.CREATED)
+                        .body(new Response(HttpStatus.OK, "User successfully created"));
+            }
+
 			return ResponseEntity
 		            .status(HttpStatus.CREATED)                 
 		            .body(((UserDetailsServiceImpl) userDetailsService).login(new AuthenticationRequestDto(requestDto.getLogin(), requestDto.getPassword())));

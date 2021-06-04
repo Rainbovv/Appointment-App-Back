@@ -1,17 +1,21 @@
 package com.stefanini.appointmentapp.dto;
 
 
+import java.util.List;
+
 public class AuthenticationResponseDto {
     private Long id;
     private String firstName;
     private String username;
     private String token;
+    private List<String> roles;
 
-    public AuthenticationResponseDto(Long id, String firstName, String username, String token) {
+    public AuthenticationResponseDto(Long id, String firstName, String username, String token, List<String> roles) {
         this.id = id;
         this.firstName = firstName;
         this.username = username;
         this.token = token;
+        this.roles = roles;
     }
 
     public AuthenticationResponseDto(String username, String token) {
@@ -49,6 +53,14 @@ public class AuthenticationResponseDto {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 
     @Override
