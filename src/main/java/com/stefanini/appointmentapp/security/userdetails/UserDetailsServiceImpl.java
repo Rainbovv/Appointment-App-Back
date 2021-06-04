@@ -42,6 +42,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return CustomUserDetailsFactory.create(profile);
     }
 
+
     public AuthenticationResponseDto login(AuthenticationRequestDto requestDto) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(requestDto.getLogin(),
