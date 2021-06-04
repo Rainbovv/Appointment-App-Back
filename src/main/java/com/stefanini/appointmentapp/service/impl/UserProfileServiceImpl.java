@@ -55,8 +55,6 @@ public class UserProfileServiceImpl implements UserProfileService {
         return profileDao.findById(id);
     }
 
-
-
     @Loggable
     @Override
     public UserProfile findByLogin(String login) {
