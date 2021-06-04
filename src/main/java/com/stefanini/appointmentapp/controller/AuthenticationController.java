@@ -3,7 +3,6 @@ package com.stefanini.appointmentapp.controller;
 import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dto.AuthenticationRequestDto;
 import com.stefanini.appointmentapp.security.userdetails.UserDetailsServiceImpl;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
@@ -32,9 +31,9 @@ public class AuthenticationController {
     public ResponseEntity<?> login(@RequestBody AuthenticationRequestDto requestDto) {
         try {
             return ResponseEntity
-                    .status(HttpStatus.CREATED)
+                    .status(HttpStatus.ACCEPTED)
                     .body(((UserDetailsServiceImpl) userDetailsService).login(requestDto));
-        } catch (AuthenticationException e) {
+        } catch ( AuthenticationException e) {
             return ResponseEntity
                     .status(HttpStatus.FORBIDDEN)
                     .body("Invalid username or password");
