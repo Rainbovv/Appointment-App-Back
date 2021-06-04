@@ -62,7 +62,7 @@ public class UserProfileController {
     }
 
     @Loggable
-    @PutMapping("/{id}")
+    @PutMapping("")
     public UserProfile updateProfile(@RequestBody UserProfile profile) {
         return profileService.update(profile);
     }
