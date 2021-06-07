@@ -26,6 +26,8 @@ public class RegistrationRequestDto {
     private String address;
     private String socialNumber;
 
+    public RegistrationRequestDto() {
+    }
 
     public RegistrationRequestDto(String login, String password, int status, String role) {
         this.login = login;

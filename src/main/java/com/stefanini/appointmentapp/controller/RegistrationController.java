@@ -40,7 +40,7 @@ public class RegistrationController {
             if (requestDto.getCreator().equals(RoleName.ADMIN.name())) {
                 return ResponseEntity
                         .status(HttpStatus.CREATED)
-                        .body(new Response(HttpStatus.OK, "User successfully created"));
+                        .body("User successfully created");
             }
 
 			return ResponseEntity
