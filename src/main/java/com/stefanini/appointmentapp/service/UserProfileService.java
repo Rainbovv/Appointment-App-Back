@@ -27,4 +27,6 @@ public interface UserProfileService {
 	List<UserProfileDto> getPersonalProfiles();
 
 	List<UserProfileDto> getPatientsProfiles();
+
+	List<UserProfile> getListBySpeciality(String Speciality);
 }

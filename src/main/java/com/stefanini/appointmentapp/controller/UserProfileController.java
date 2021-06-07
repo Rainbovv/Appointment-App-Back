@@ -57,6 +57,12 @@ public class UserProfileController {
     }
 
     @Loggable
+    @GetMapping("/speciality/{speciality}")
+    public List<UserProfile> getListBySpeciality(@PathVariable String speciality) {
+        return profileService.getListBySpeciality(speciality);
+    }
+
+    @Loggable
     @PostMapping
     public UserProfile createNewProfile(@RequestBody UserProfile profile) {
         return profileService.create(profile);

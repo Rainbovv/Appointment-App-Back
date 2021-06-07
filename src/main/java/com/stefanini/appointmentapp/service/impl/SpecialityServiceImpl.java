@@ -30,6 +30,11 @@ public class SpecialityServiceImpl implements SpecialityService {
         return specialityDAO.findById(specialityId);
     }
 
+    @Override
+    public List<Speciality> findByDepartmentId(Long departmentId) {
+        return specialityDAO.getListByDepartmentId(departmentId);
+    }
+
     @Transactional
     @Loggable
     @Override

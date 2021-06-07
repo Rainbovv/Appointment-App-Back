@@ -104,6 +104,12 @@ public class UserProfileServiceImpl implements UserProfileService {
         return profileDao.getProfilesByRole("PATIENT");
     }
 
+    @Loggable
+    @Override
+    public List<UserProfile> getListBySpeciality(String speciality) {
+        return profileDao.getListBySpeciality(speciality);
+    }
+
     private User mapDtoToUser(RegistrationRequestDto userDto) {
         User user = new User();
         String role = userDto.getRole();
