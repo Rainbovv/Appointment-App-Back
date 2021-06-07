@@ -20,9 +20,13 @@ import java.util.Objects;
 @Service
 public class UserProfileServiceImpl implements UserProfileService {
     private final UserProfileDAO profileDao;
+    private final UserRoleDAO roleDAO;
+    private final PasswordEncoder passwordEncoder;
 
     public UserProfileServiceImpl(UserProfileDAO profileDao, UserRoleDAO roleDAO, PasswordEncoder passwordEncoder) {
         this.profileDao = profileDao;
+        this.roleDAO = roleDAO;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Loggable
@@ -36,6 +40,17 @@ public class UserProfileServiceImpl implements UserProfileService {
     @Override
     public UserProfile create(UserProfile profile) {
         return profileDao.create(profile);
+    }
+
+    @Loggable
+    @Transactional
+    @Override
+    public UserProfile create(RegistrationRequestDto dto){
+        User newUser = mapDtoToUser(dto);
+        UserProfile newUserProfile = mapDtoToUserProfile(dto);
+        newUserProfile.setUser(newUser);
+
+        return profileDao.create(newUserProfile);
     }
 
     @Loggable
@@ -87,5 +102,42 @@ public class UserProfileServiceImpl implements UserProfileService {
     @Override
     public List<UserProfileDto> getPatientsProfiles() {
         return profileDao.getProfilesByRole("PATIENT");
+    }
+
+    @Loggable
+    @Override
+    public List<UserProfile> getListBySpeciality(String speciality) {
+        return profileDao.getListBySpeciality(speciality);
+    }
+
+    private User mapDtoToUser(RegistrationRequestDto userDto) {
+        User user = new User();
+        String role = userDto.getRole();
+
+        if (Objects.isNull(role)) {
+            throw new IllegalArgumentException("Registration error: user role was not specified");
+        }
+        user.setLogin(userDto.getLogin());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setRoles(Collections.singletonList(roleDAO.findByName(role)));
+        user.setStatus(userDto.getStatus());
+
+        return user;
+    }
+
+    private UserProfile mapDtoToUserProfile(RegistrationRequestDto userDto) {
+        UserProfile userProfile = new UserProfile();
+        userProfile.setFirstName(userDto.getFirstName());
+        userProfile.setLastName(userDto.getLastName());
+        userProfile.setGender(userDto.getGender());
+        userProfile.setOffice(userDto.getOffice());
+        userProfile.setAddress(userDto.getAddress());
+        userProfile.setAbout(userDto.getAbout());
+        userProfile.setTelephone(userDto.getTelephone());
+        userProfile.setDegree(userDto.getDegree());
+        userProfile.setEmail(userDto.getLogin());
+        userProfile.setDateOfBirth(userDto.getDateOfBirth());
+
+        return userProfile;
     }
 }

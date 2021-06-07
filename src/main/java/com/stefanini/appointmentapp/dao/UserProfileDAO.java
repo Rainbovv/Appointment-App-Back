@@ -14,5 +14,18 @@ public interface UserProfileDAO extends GenericDAO<UserProfile> {
      */
     UserProfile getByLogin(String login);
 
+    /**
+     * Searches persisted profiles by users role
+     * @param profileRole of type String
+     * @return List of UserProfile entities
+     */
     List<UserProfileDto> getProfilesByRole(String profileRole);
+
+
+    /**
+     * Searches persisted profiles by speciality
+     * @param speciality of type String
+     * @return List of UserProfile entities
+     */
+    List<UserProfile> getListBySpeciality(String speciality);
 }

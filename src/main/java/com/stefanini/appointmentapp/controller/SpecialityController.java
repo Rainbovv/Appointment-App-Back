@@ -34,6 +34,13 @@ public class SpecialityController {
     }
 
     @Loggable
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/specialities/department/{id}")
+    public List<Speciality> getListByDepartmentId(@PathVariable long id) {
+        return specialityService.findByDepartmentId(id);
+    }
+
+    @Loggable
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "/specialities", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Speciality create(@RequestBody Speciality speciality) {
