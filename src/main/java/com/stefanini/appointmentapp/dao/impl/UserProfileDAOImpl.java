@@ -3,12 +3,14 @@ package com.stefanini.appointmentapp.dao.impl;
 import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dao.UserProfileDAO;
 import com.stefanini.appointmentapp.dto.UserProfileDto;
+import com.stefanini.appointmentapp.entities.Speciality;
 import com.stefanini.appointmentapp.entities.User;
 import com.stefanini.appointmentapp.entities.UserProfile;
 import com.stefanini.appointmentapp.entities.UserRole;
 import com.stefanini.appointmentapp.entities.enums.RoleName;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import javax.persistence.criteria.*;
 import java.util.List;
 
@@ -25,15 +27,11 @@ public class UserProfileDAOImpl extends GenericDAOImpl<UserProfile> implements U
     @Override
     public UserProfile getByLogin(String login) {
 
-        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<UserProfile> criteria = builder.createQuery(getEntityClass());
-        Root<UserProfile> root = criteria.from(getEntityClass());
-        Join<UserProfile, User> join = root.join("user");
+        Query query = entityManager.createQuery("SELECT p FROM " +
+                getEntityClass().getName() + " p WHERE p.user.login=:login");
+        query.setParameter("login", login);
 
-        criteria.select(root);
-        criteria.where(builder.equal(join.get("login"), login));
-
-        return entityManager.createQuery(criteria).getSingleResult();
+        return (UserProfile) query.getSingleResult();
     }
 
     @Loggable
@@ -72,6 +70,18 @@ public class UserProfileDAOImpl extends GenericDAOImpl<UserProfile> implements U
                 join.get("id"),
                 join.get("name")
         );
+        return entityManager.createQuery(criteria).getResultList();
+    }
+
+    @Override
+    public List<UserProfile> getListBySpeciality(String speciality) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<UserProfile> criteria = builder.createQuery(getEntityClass());
+        Root<UserProfile> root = criteria.from(getEntityClass());
+        Join<UserProfile, Speciality> join = root.join("specialities");
+
+        criteria.where(builder.equal(join.get("name"), speciality));
+
         return entityManager.createQuery(criteria).getResultList();
     }
 }

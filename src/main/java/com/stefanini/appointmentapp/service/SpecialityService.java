@@ -23,6 +23,14 @@ public interface SpecialityService {
     Speciality findById(Long id);
 
     /**
+     * Method finds all persisted specialities by
+     * department_id using SpecialityDAO
+     * @param departmentId Long
+     * @return List of found Speciality entities
+     */
+    List<Speciality> findByDepartmentId(Long departmentId);
+
+    /**
      * Method creates department.
      * NOTE: do not forget to pass department with departmentId to link creating speciality
      * with existing department
