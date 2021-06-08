@@ -28,7 +28,7 @@ public class UserRoleDAOImpl extends GenericDAOImpl<UserRole> implements UserRol
 		Query query = entityManager.createQuery("SELECT r FROM " +
 				getEntityClass().getName() + "" + " r WHERE r.name=:name");
 
-		query.setParameter("login", RoleName.valueOf(name));
+		query.setParameter("name", RoleName.valueOf(name));
 
 		return (UserRole) query.getSingleResult();
 	}

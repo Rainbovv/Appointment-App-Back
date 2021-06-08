@@ -81,7 +81,7 @@ public class UserProfile {
 	
 	@OneToMany
 	@LazyCollection(LazyCollectionOption.FALSE)
-	@JoinColumn(name = "holiday", referencedColumnName = "id")
+	@JoinColumn(name = "profile_id", referencedColumnName = "id")
 	private List<Holiday> holidays;
 
 
