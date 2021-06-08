@@ -1,13 +1,8 @@
 package com.stefanini.appointmentapp.entities;
 
-import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalTime;
 
 /**
  * DailySchedule is an entity that represents daily schedule for a clinic worker.
@@ -26,11 +21,11 @@ public class DailySchedule {
 
 	@NotNull
 	@Column(name = "start")
-	private LocalDateTime start;
+	private LocalTime start;
 
 	@NotNull
 	@Column(name = "end")
-	private LocalDateTime end;
+	private LocalTime end;
 
 	/**
 	 * gets id.
@@ -55,7 +50,7 @@ public class DailySchedule {
 	 * @return Time
 	 */
 	
-	public LocalDateTime getStart() {
+	public LocalTime getStart() {
 		return start;
 	}
 	
@@ -64,7 +59,7 @@ public class DailySchedule {
 	 * @param start Time
 	 */
 
-	public void setStart(LocalDateTime start) {
+	public void setStart(LocalTime start) {
 		this.start = start;
 	}
 	
@@ -73,7 +68,7 @@ public class DailySchedule {
 	 * @return Time
 	 */
 
-	public LocalDateTime getEnd() {
+	public LocalTime getEnd() {
 		return end;
 	}
 	
@@ -82,7 +77,7 @@ public class DailySchedule {
 	 * @param end Time
 	 */
 
-	public void setEnd(LocalDateTime end) {
+	public void setEnd(LocalTime end) {
 		this.end = end;
 	}
 
