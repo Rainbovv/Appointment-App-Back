@@ -17,6 +17,9 @@ public class AuthenticationResponseDto {
         this.roles = roles;
     }
 
+    public AuthenticationResponseDto() {
+    }
+
     public AuthenticationResponseDto(String username, String token) {
         this.username = username;
         this.token = token;
