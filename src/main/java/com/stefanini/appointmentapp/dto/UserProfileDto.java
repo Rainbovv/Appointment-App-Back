@@ -1,6 +1,5 @@
 package com.stefanini.appointmentapp.dto;
 
-import com.stefanini.appointmentapp.entities.UserRole;
 import com.stefanini.appointmentapp.entities.enums.RoleName;
 
 public class UserProfileDto {

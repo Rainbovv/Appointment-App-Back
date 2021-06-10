@@ -1,4 +1,5 @@
 package com.stefanini.appointmentapp.config;
+
 import com.mysql.cj.jdbc.MysqlDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;

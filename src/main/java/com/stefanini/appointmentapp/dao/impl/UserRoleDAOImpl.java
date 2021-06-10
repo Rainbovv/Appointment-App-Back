@@ -2,16 +2,11 @@ package com.stefanini.appointmentapp.dao.impl;
 
 import com.stefanini.appointmentapp.annotation.Loggable;
 import com.stefanini.appointmentapp.dao.UserRoleDAO;
-import com.stefanini.appointmentapp.entities.UserProfile;
 import com.stefanini.appointmentapp.entities.UserRole;
 import com.stefanini.appointmentapp.entities.enums.RoleName;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
-import org.springframework.stereotype.Repository;
 
 
 @Repository

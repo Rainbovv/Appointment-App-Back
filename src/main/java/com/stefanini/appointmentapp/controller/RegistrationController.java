@@ -7,7 +7,6 @@ import com.stefanini.appointmentapp.dto.Response;
 import com.stefanini.appointmentapp.entities.enums.RoleName;
 import com.stefanini.appointmentapp.security.userdetails.UserDetailsServiceImpl;
 import com.stefanini.appointmentapp.service.UserProfileService;
-import com.stefanini.appointmentapp.service.UserService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
