@@ -1,7 +1,6 @@
 package com.stefanini.appointmentapp.service;
 
 import com.stefanini.appointmentapp.entities.WeeklySchedule;
-
 import java.util.List;
 
 public interface WeeklyScheduleService {

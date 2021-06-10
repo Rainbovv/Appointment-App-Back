@@ -1,6 +1,5 @@
 package com.stefanini.appointmentapp.dto;
 
-
 import java.util.List;
 
 public class AuthenticationResponseDto {

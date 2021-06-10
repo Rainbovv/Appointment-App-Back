@@ -4,9 +4,11 @@ import com.stefanini.appointmentapp.dto.AuthenticationResponseDto;
 import com.stefanini.appointmentapp.security.userdetails.CustomUserDetails;
 import com.stefanini.appointmentapp.security.userdetails.CustomUserDetailsFactory;
 import com.stefanini.appointmentapp.service.UserProfileService;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -60,14 +62,6 @@ public class JwtTokenProvider {
 
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
         return !claimsJws.getBody().getExpiration().before(new Date());
-//        try {
-//            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
-//            return !claimsJws.getBody().getExpiration().before(new Date());
-//        } catch (SignatureException | MalformedJwtException | UnsupportedJwtException | IllegalArgumentException ex) {
-//            throw new BadCredentialsException("INVALID_CREDENTIALS", ex);
-//        } catch (ExpiredJwtException ex) {
-//            throw ex;
-//        }
     }
 
     public Authentication getAuthentication(String token) {

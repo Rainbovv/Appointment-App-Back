@@ -3,7 +3,6 @@ package com.stefanini.appointmentapp.dao.impl;
 import com.stefanini.appointmentapp.dao.AppointmentDao;
 import com.stefanini.appointmentapp.dto.UserAppointmentDTO;
 import com.stefanini.appointmentapp.entities.Appointment;
-import com.stefanini.appointmentapp.entities.User;
 import com.stefanini.appointmentapp.entities.UserProfile;
 import org.springframework.stereotype.Repository;
 
