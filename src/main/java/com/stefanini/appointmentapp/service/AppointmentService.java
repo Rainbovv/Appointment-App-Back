@@ -1,5 +1,6 @@
 package com.stefanini.appointmentapp.service;
 
+import com.stefanini.appointmentapp.dto.CreateAppointmentDTO;
 import com.stefanini.appointmentapp.dto.UserAppointmentDTO;
 import com.stefanini.appointmentapp.entities.Appointment;
 import java.util.List;
@@ -12,6 +13,14 @@ public interface AppointmentService {
      * @return persisted appointment
      */
     Appointment create(Appointment appointment);
+
+    /**
+     * Gets a CreateAppointmentDTO, maps to Appointments
+     * and persits it using AppointmentDaoImpl
+     * @param dto of Type CreateAppointmentDTO to persist
+     * @return persisted appointment
+     */
+    Appointment createWithDTO(CreateAppointmentDTO dto);
 
     /**
      * Updates an Appointment using AppointmentDaoImpl
