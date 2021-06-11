@@ -88,7 +88,7 @@ public class Appointment {
 	 * @param patient User
 	 */
 
-	public void setPatient_id(User patient) {
+	public void setPatient(User patient) {
 		this.patient = patient;
 	}
 	
@@ -196,7 +196,7 @@ public class Appointment {
 	 * @param lastUpdate LocalDateTime
 	 */
 
-	public void setLast_update(LocalDateTime lastUpdate) {
+	public void setLastUpdate(LocalDateTime lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 
