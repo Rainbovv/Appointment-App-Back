@@ -1,5 +1,18 @@
 version: "3.8"
+
 services:
+  mysql:
+    image: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_USER_LOGIN=admin
+      - MYSQL_USER_PASSWORD=admin
+      - MYSQL_DB=appointments
+    volumes:
+      - ./scripts/test.sql:/docker-entrypoint-initdb.d/test.sql
+      - ./db-data:/var/lib/postgresql/data/kotahi:z
   back:
     build: .
     ports:
@@ -7,8 +20,18 @@ services:
     volumes:
       - .:/code
       - logvolume01:/var/log
+    environment:
+      - NODE_ENV_TYPE=development
+    depends_on:
+      - mysql
   front:
-
-  mysql:
+    build: .
     ports:
-      - "3306:3306"
+      - "3000:3000"
+    environment:
+      - NODE_ENV_TYPE=development
+    depends_on:
+      - back
+    volumes:
+      - .:/code
+      - logvolume01:/var/log
