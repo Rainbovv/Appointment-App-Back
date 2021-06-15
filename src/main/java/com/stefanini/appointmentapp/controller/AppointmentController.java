@@ -1,6 +1,7 @@
 package com.stefanini.appointmentapp.controller;
 
 import com.stefanini.appointmentapp.annotation.Loggable;
+import com.stefanini.appointmentapp.dto.CreateAppointmentDTO;
 import com.stefanini.appointmentapp.dto.UserAppointmentDTO;
 import com.stefanini.appointmentapp.entities.Appointment;
 import com.stefanini.appointmentapp.service.AppointmentService;
@@ -43,6 +44,13 @@ public class AppointmentController {
     Appointment findById(@PathVariable Long id) {
 
         return appointmentService.findById(id);
+    }
+
+    @Loggable
+    @PostMapping(value = "/dto", consumes = MediaType.APPLICATION_JSON_VALUE)
+    Appointment createWithDTO (@RequestBody CreateAppointmentDTO dto) {
+
+        return appointmentService.createWithDTO(dto);
     }
 
     @Loggable

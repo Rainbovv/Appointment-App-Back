@@ -1,6 +1,5 @@
 package com.stefanini.appointmentapp.dto;
 
-
 import java.util.List;
 
 public class AuthenticationResponseDto {
@@ -16,6 +15,9 @@ public class AuthenticationResponseDto {
         this.username = username;
         this.token = token;
         this.roles = roles;
+    }
+
+    public AuthenticationResponseDto() {
     }
 
     public AuthenticationResponseDto(String username, String token) {

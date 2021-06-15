@@ -1,6 +1,5 @@
 package com.stefanini.appointmentapp.dto;
 
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
@@ -26,6 +25,8 @@ public class RegistrationRequestDto {
     private String address;
     private String socialNumber;
 
+    public RegistrationRequestDto() {
+    }
 
     public RegistrationRequestDto(String login, String password, int status, String role) {
         this.login = login;

@@ -5,6 +5,9 @@ public class AuthenticationRequestDto {
     private String login;
     private String password;
 
+    public AuthenticationRequestDto() {
+    }
+
     public AuthenticationRequestDto(String login, String password) {
         this.login = login;
         this.password = password;

@@ -1,6 +1,5 @@
 package com.stefanini.appointmentapp.service;
 
-import com.stefanini.appointmentapp.dto.RegistrationRequestDto;
 import com.stefanini.appointmentapp.entities.User;
 import java.util.List;
 

@@ -3,7 +3,6 @@ package com.stefanini.appointmentapp.dao.impl;
 import com.stefanini.appointmentapp.dao.AppointmentDao;
 import com.stefanini.appointmentapp.dto.UserAppointmentDTO;
 import com.stefanini.appointmentapp.entities.Appointment;
-import com.stefanini.appointmentapp.entities.User;
 import com.stefanini.appointmentapp.entities.UserProfile;
 import org.springframework.stereotype.Repository;
 
@@ -21,26 +20,42 @@ public class AppointmentDaoImpl extends GenericDAOImpl<Appointment> implements A
     @Override
     public List<UserAppointmentDTO> findByUserId(Long id, String userRole) {
 
-        String profileRole = userRole.equals("patient") ? "doctor" : "patient";
-
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<UserAppointmentDTO> criteria = builder
                 .createQuery(UserAppointmentDTO.class);
 
         Root<Appointment> appointmentRoot = criteria.from(getEntityClass());
-        Root<UserProfile> profileRoot = criteria.from(UserProfile.class);
+        Root<UserProfile> doctorRoot = criteria.from(UserProfile.class);
+        Root<UserProfile> patientRoot = criteria.from(UserProfile.class);
 
-        criteria.where(builder.and(builder.equal(appointmentRoot.get(userRole).get("id"), id),
-                builder.equal(profileRoot.get("user").get("id"),
-                        appointmentRoot.get(profileRole).get("id"))));
+        criteria.where(builder.and(builder
+                                    .equal(appointmentRoot.get(userRole).get("id"),
+                                            id)),
+                        builder.and(
+                            builder.equal(doctorRoot.get("user").get("id"),
+                                    appointmentRoot.get("doctor").get("id")),
 
+                            builder.equal(patientRoot.get("user").get("id"),
+                                    appointmentRoot.get("patient").get("id"))));
+
+        Selection<String> firstNameSelection;
+        Selection<String> lastNameSelection;
+
+        if (userRole.equals("patient")) {
+            firstNameSelection = doctorRoot.get("firstName");
+            lastNameSelection = doctorRoot.get("lastName");
+        }
+        else {
+            firstNameSelection = patientRoot.get("firstName");
+            lastNameSelection = patientRoot.get("lastName");
+        }
 
         criteria.multiselect(appointmentRoot.get("id"),
                 appointmentRoot.get("startTime"),
                 appointmentRoot.get("endTime"),
-                profileRoot.get("firstName"),
-                profileRoot.get("lastName"),
-                profileRoot.get("office"));
+                firstNameSelection,
+                lastNameSelection,
+                doctorRoot.get("office"));
 
         return entityManager.createQuery(criteria).getResultList();
     }
