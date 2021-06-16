@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.stefanini</groupId>
 	<artifactId>appointment-app</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>appointment-app</name>
 	<properties>
 		<java.version>8</java.version>
