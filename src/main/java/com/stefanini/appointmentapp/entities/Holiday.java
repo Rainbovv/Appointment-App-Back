@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "holiday")
 public class Holiday {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 
