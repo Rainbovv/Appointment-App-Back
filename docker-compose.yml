@@ -2,36 +2,63 @@ version: "3.8"
 
 services:
   mysql:
-    image: mysql
-    restart: always
+    image: mysql:latest
+    container_name: mysql
+    restart: unless-stopped
+    hostname: 'mysqlserver'
     ports:
-      - "3306:3306"
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3306:3306'
     environment:
-      - MYSQL_USER_LOGIN=admin
-      - MYSQL_USER_PASSWORD=admin
-      - MYSQL_DB=appointments
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+      - MYSQL_DATABASE=appointments
+      - MYSQL_ROOT_PASSWORD=admin
     volumes:
-      - ./scripts/test.sql:/docker-entrypoint-initdb.d/test.sql
-      - ./db-data:/var/lib/postgresql/data/kotahi:z
+      - db-data:/var/lib/appointments
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 2s
+      timeout: 30s
+      retries: 5
   back:
-    build: .
+    container_name: api
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
     volumes:
-      - .:/code
-      - logvolume01:/var/log
-    environment:
-      - NODE_ENV_TYPE=development
+      - target:/code
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
   front:
-    build: .
+    container_name: front
+    build:
+      context: ../Appointment-App-Front
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV_TYPE=development
+      - NODE_ENV_TYPE=production
     depends_on:
       - back
-    volumes:
-      - .:/code
-      - logvolume01:/var/log
+    command: npm run prod
+#nginx:
+#  image: nginx:stable-alpine
+#  container_name: nginx
+#  ports:
+#    - "80:80"
+#  volumes:
+#    - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
+#  depends_on:
+#    - frontend
+#    - api
+#    - auth
+#  networks:
+#    - realworld-docker-network
+volumes:
+  db-data:
+  target:
+  front:
