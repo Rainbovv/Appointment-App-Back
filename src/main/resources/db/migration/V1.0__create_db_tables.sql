@@ -17,12 +17,8 @@ create table if not exists department
     name varchar(255) not null
 );
 
-create table if not exists hibernate_sequence
-(
-    next_val bigint null
-);
-
-create table if not exists role
+drop table if exists role;
+create table role
 (
     id bigint not null
         primary key
@@ -30,7 +26,8 @@ create table if not exists role
     name varchar(255) null
 );
 
-create table if not exists speciality
+drop table if exists speciality;
+create table speciality
 (
     id bigint not null
         primary key
@@ -40,7 +37,8 @@ create table if not exists speciality
     foreign key (department_id) references department (id)
 );
 
-create table if not exists user
+drop table if exists user;
+create table user
 (
     id bigint auto_increment
         primary key,
@@ -52,7 +50,8 @@ create table if not exists user
     unique (login)
 );
 
-create table if not exists appointments
+drop table if exists appointments;
+create table appointments
 (
     id bigint not null
         primary key
@@ -68,7 +67,8 @@ create table if not exists appointments
     foreign key (patient_id) references user (id)
 );
 
-create table if not exists user_roles
+drop table if exists user_roles;
+create table user_roles
 (
     user_id bigint not null,
     role_id bigint not null,
@@ -76,7 +76,8 @@ create table if not exists user_roles
     foreign key (role_id) references role (id)
 );
 
-create table if not exists weekly_schedule
+drop table if exists weekly_schedule;
+create table weekly_schedule
 (
     id bigint not null
         primary key
@@ -97,7 +98,8 @@ create table if not exists weekly_schedule
     foreign key (sunday) references daily_schedule (id)
 );
 
-create table if not exists profile
+drop table if exists profile;
+create table profile
 (
     id bigint not null
         primary key
@@ -120,7 +122,8 @@ create table if not exists profile
     foreign key (schedule) references weekly_schedule (id)
 );
 
-create table if not exists doctors_speciality
+drop table if exists doctors_speciality;
+create table doctors_speciality
 (
     doctor_id bigint not null,
     speciality_id bigint not null,
@@ -128,7 +131,8 @@ create table if not exists doctors_speciality
     foreign key (doctor_id) references profile (id)
 );
 
-create table if not exists holiday
+drop table if exists holiday;
+create table holiday
 (
     id bigint not null
         primary key
