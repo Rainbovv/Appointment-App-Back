@@ -21,7 +21,7 @@ VALUES ('Plastic surgery', 1),
        ('Pediatric endocrinology', 4);
 
 INSERT INTO user (created, last_update, login, password, status)
-VALUES (NOW(), NOW(), 'admin@domain.com', '$2y$10$p0SwmNHakBpd2d6kP.wgWeMp6nWOUEWwhSXgeS/SzOQUzQ6sUlmFy', 1),
+VALUES (NOW(), NOW(), 'admin@domain.com', '$2a$10$9trjpyBvZGgl4.igLG6nUuvb71gpIIO/Ovc1QCF0EYQEd9kTRGFZu', 1),
        (NOW(), NOW(), 'doctor@domain.com', '$2y$10$jHhIl1D3Fa5raUjImLFhC.bQf5WFjJV8O3ylUSUo5M.R2N85vIaxO', 1),
        (NOW(), NOW(), 'doctor1@domain.com', '$2y$10$jHhIl1D3Fa5raUjImLFhC.bQf5WFjJV8O3ylUSUo5M.R2N85vIaxO', 1),
        (NOW(), NOW(), 'doctor2@domain.com', '$2y$10$jHhIl1D3Fa5raUjImLFhC.bQf5WFjJV8O3ylUSUo5M.R2N85vIaxO', 1),
@@ -65,7 +65,7 @@ VALUES (1,1,1,1,1,1,1),
        (2,2,2,2,2,2,2);
 
 INSERT INTO profile (about, address, email, first_name, gender, last_name, office, social_number, telephone, schedule ,user_id)
-VALUES ('info about admin', 'Milky Way 1', 'admin@domain.com', 'admin', 'male', 'admin', null, 12345, +37312345, 1 ,1),
+VALUES ('info about admin', 'Milky Way 1', 'admin@domain.com', 'admin', 'male', 'admin', 0, 12345, +37312345, 1 ,1),
        ('info about doctor', 'Milky Way 2', 'doctor@domain.com', 'Eugen', 'male', 'Vitalco', 144, 1122333, +37323244, 2, 2),
        ('info about doctor', 'Milky Way 3', 'doctor1@domain.com', 'Magomed', 'male', 'Musafirovich', 145, 1122333, +37323244, 1, 3),
        ('info about doctor', 'Milky Way 4', 'doctor2@domain.com', 'Eliza', 'female', 'Voshca', 146, 1122333, +37323244, 2, 4),
