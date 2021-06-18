@@ -17,8 +17,8 @@ VALUES ('Facial surgeon', 1),
        ('Manager', 4);
 
 INSERT INTO daily_schedule (end, start)
-VALUES ('09:00:00', '18:00:00'),
-       ('10:00:00', '17:00:00');
+VALUES ('18:00:00', '09:00:00'),
+       ('17:00:00', '10:00:00');
 
 INSERT INTO user (login, password, status)
 VALUES ('admin@mail.com', '$2a$04$xrAwXxsF7KZWZI6s6qwHVuIlwJjZLmxDUBBgwF9nAlDT1.r/g7B7.', 1),
@@ -36,12 +36,10 @@ VALUES (2, 1);
 INSERT INTO user_roles (user_id, role_id)
 VALUES (1, 1),
        (2, 2),
-       (3, 3),
-       (4, 3);
+       (3, 3);
 
 INSERT INTO appointments(created, end_time, last_update, remark, start_time, doctor_id, patient_id )
-VALUES ('2021-06-15 15:02:28', '2021-08-22 15:02:31', '2021-06-15 15:02:43', 'appointment remark', '2021-06-16 15:02:52', 2, 3),
-       ('2021-06-17 15:02:28', '2021-08-22 15:02:31', '2021-06-15 15:02:43', 'appointment remark2', '2021-06-17 15:02:52', 2, 4);
+VALUES ('2021-06-15 15:02:28', '2021-08-22 15:02:31', '2021-06-15 15:02:43', 'appointment remark', '2021-06-16 15:02:52', 2, 3);
 
 INSERT INTO weekly_schedule (friday, monday, saturday, sunday, thursday, tuesday, wednesday)
 VALUES (1, 1, null, null, 1, 1, 1),
