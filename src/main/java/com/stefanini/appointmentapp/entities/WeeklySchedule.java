@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name = "weekly_schedule")
 public class WeeklySchedule {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 

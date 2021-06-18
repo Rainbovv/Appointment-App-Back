@@ -27,8 +27,8 @@ class RegistrationControllerTest {
 
     private static final String USERNAME = "USERNAME";
     private static final String TOKEN = "TOKEN";
-    private static final String SIGN_UP_MSG = "User successfully created";
     private static final String DUPLICATE_EMAIL_MSG = "User with this email already exists";
+    private static final String USER_CREATED = "User successfully created";
 
     RegistrationRequestDto requestDto;
     AuthenticationResponseDto responseDto;
@@ -77,7 +77,7 @@ class RegistrationControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"login\" : \"user\", \"creator\" : \"ADMIN\"}"))
                 .andExpect(status().isCreated())
-                .andExpect(content().string(SIGN_UP_MSG));
+                .andExpect(jsonPath("$.message").value(USER_CREATED));
     }
 
     @Test
