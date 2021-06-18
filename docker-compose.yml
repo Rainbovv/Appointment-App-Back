@@ -21,6 +21,8 @@ services:
       interval: 2s
       timeout: 30s
       retries: 5
+    networks:
+      - app-network
   back:
     container_name: api
     build:
@@ -34,11 +36,14 @@ services:
       mysql:
         condition: service_healthy
     restart: on-failure
+    networks:
+      - app-network
   front:
     container_name: front
     build:
       context: ../Appointment-App-Front
       dockerfile: Dockerfile
+    hostname: "frontend"
     ports:
       - "3000:3000"
     environment:
@@ -46,20 +51,26 @@ services:
     depends_on:
       - back
     command: npm run prod
-#nginx:
-#  image: nginx:stable-alpine
-#  container_name: nginx
-#  ports:
-#    - "80:80"
-#  volumes:
-#    - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
-#  depends_on:
-#    - frontend
-#    - api
-#    - auth
-#  networks:
-#    - realworld-docker-network
+    networks:
+      - app-network
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx-server
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf
+    tty: true
+    depends_on:
+      - front
+    restart: always
+    networks:
+      - app-network
 volumes:
   db-data:
   target:
   front:
+
+networks:
+  app-network:
+    driver: bridge
