@@ -39,9 +39,7 @@ public class RegistrationController {
             profileService.create(requestDto);
 
             if (requestDto.getCreator().equals(RoleName.ADMIN.name())) {
-                return ResponseEntity
-                        .status(HttpStatus.CREATED)
-                        .body("User successfully created");
+                return new ResponseEntity<>("{\"message\" : \"User successfully created\"}", HttpStatus.CREATED);
             }
 
 			return ResponseEntity
