@@ -2,8 +2,8 @@
 
 Used technologies:
 
-Spring-Boot
-Hibernate
-Spring Security
-JSON Web Token
-Flyway
+Spring-Boot,
+Hibernate,
+Spring Security,
+JSON Web Token,
+Flyway.
