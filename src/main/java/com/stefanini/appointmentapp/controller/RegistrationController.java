@@ -13,10 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.transaction.UnexpectedRollbackException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -28,6 +25,11 @@ public class RegistrationController {
     public RegistrationController(UserDetailsService userDetailsService, UserProfileService profileService) {
         this.userDetailsService = userDetailsService;
         this.profileService = profileService;
+    }
+
+    @GetMapping("/health")
+    public ResponseEntity<?> healthCheck() {
+        return ResponseEntity.status(HttpStatus.OK).body("Healthy!");
     }
 
     @Loggable

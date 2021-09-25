@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.stefanini</groupId>
 	<artifactId>appointment-app</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>appointment-app</name>
 	<properties>
 		<java.version>8</java.version>
@@ -69,6 +69,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>7.10.0</version>
 		</dependency>
 	</dependencies>
 
